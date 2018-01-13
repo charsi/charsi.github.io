@@ -88,5 +88,5 @@ deploy:
   #agent: [path/to/agent/socket]
   type: git
   repo: git@github.com:charsi/blog.git
-  branch: master
+  branch: gh-pages
   #message: [message]
