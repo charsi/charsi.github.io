@@ -31,7 +31,7 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "technology, computers, india, travel"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -41,20 +41,20 @@ rss:
 footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
-  since: 2010
+  #since: 2010
 
   # Icon between year and copyright info.
-  icon: heart
+  #icon: heart
 
   # If not defined, will be used `author` from Hexo main config.
-  copyright: <a href="https://nishil.in">Nishil</a>
+  #copyright: <a href="https://nishil.in">Nishil</a>
   # -------------------------------------------------------------
   # Hexo link (Powered by Hexo).
-  powered: true
+  #powered: true
 
   theme:
     # Theme & scheme info link (Theme - NexT.scheme).
-    enable: true
+    enable: false
     # Version info of NexT after scheme info (vX.X.X).
     version: false
   # -------------------------------------------------------------
@@ -99,8 +99,8 @@ menu:
 
 # Enable/Disable menu icons / item badges.
 menu_settings:
-  icons: true
-  badges: true
+  icons: false
+  badges: false
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -126,19 +126,19 @@ site_state: false
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  GitHub: https://github.com/charsi || github
+  #GitHub: https://github.com/charsi || github
   #E-Mail: mailto:yourname@gmail.com || envelope
   #Google: https://plus.google.com/yourname || google
-  Twitter: https://twitter.com/nishilk || twitter
-  Facebook: https://www.facebook.com/8488307681665f3dc017ebcab0c4cd7b1733e102 || facebook
+  #Twitter: https://twitter.com/nishilk || twitter
+  #Facebook: https://www.facebook.com/8488307681665f3dc017ebcab0c4cd7b1733e102 || facebook
   #VK Group: https://vk.com/yourname || vk
-  StackOverflow: https://stackoverflow.com/users/3761234 || stack-overflow
-  YouTube: https://www.youtube.com/user/dumblittlekid || youtube
-  Instagram: https://www.instagram.com/ncetbh/ || instagram
+  ##StackOverflow: https://stackoverflow.com/users/3761234 || stack-overflow
+  #YouTube: https://www.youtube.com/user/dumblittlekid || youtube
+  #Instagram: https://www.instagram.com/ncetbh/ || instagram
   #Skype: skype:yourname?call|chat || skype
 
 social_icons:
-  enable: true
+  enable: false
   icons_only: false
   transition: false
 
@@ -155,16 +155,16 @@ links_icon: none
 links_layout: inline
 links:
   #Home: https://nishil.in/
-  Projects: https://nishil.in/projects/
+  #Projects: https://nishil.in/projects/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: /images/giphy.gif
+# avatar: /images/giphy.gif
 
 # Table Of Contents in the Sidebar
 toc:
-  enable: true
+  enable: false
 
   # Automatically add list number to toc.
   number: true
@@ -747,7 +747,7 @@ vendors:
   _internal: lib
 
   # Internal version: 2.1.3
-  jquery:
+  #jquery:
 
   # Internal version: 2.1.5
   # See: http://fancyapps.com/fancybox/
