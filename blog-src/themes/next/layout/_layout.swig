@@ -12,7 +12,7 @@
   {% include '_third-party/analytics/index.swig' %}
   
       <!-- Bigfoot footers-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bigfoot/2.1.4/bigfoot-number.min.css"></link>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bigfoot/2.1.4/bigfoot-number.min.css"></link>
 
       <style>  
       .post .post-content figcaption {
@@ -32,7 +32,7 @@
           font-size: 1rem;
         }
       </style>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link href="/css/jumbotron-narrow.css" rel="stylesheet">
 	<link href="/css/style.css" rel="stylesheet">
 </head>
