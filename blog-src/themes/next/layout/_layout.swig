@@ -33,17 +33,11 @@
           <h3 class="text-muted"><a href="/">Nishil Kohli</a></h3>
         </div>
       </div> <!-- /header -->
-      <div class="row marketing">
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-12">  
           <div class="content-wrap">
             <div id="content" class="content">
               {% block content %}{% endblock %}
             </div>
           </div>
-        </div>
-      </div>
       <div class="row footer">
         <div class="col-12">
           <h5 class="text-muted">Find me on the Internet</h5>
