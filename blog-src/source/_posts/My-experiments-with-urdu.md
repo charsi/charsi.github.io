@@ -9,27 +9,30 @@ tags:
 
 category: Other Stuff
 ---
-A few years ago I tried to learn to read Urdu. It is basically the same language as Hindi with a different script so I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.
+### Learning Urdu
+A few years ago I tried to learn to read Urdu. Since it is basically the same language as Hindi with a different script, I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.
 
-I left it at that until last year when I moved back to India. I took some classes at [Zabaan](zabaan.com). And I can now easily read signs around Delhi that are written in Urdu. Not terribly useful as on the same board the text is repeated in two other languages I can read. But it has still been quite a fulfilling endeavour. My granddad who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story. 
+I left it at that until last year when I moved back to Delhi. I took some classes at [Zabaan](http://www.zabaan.com). This helped a lot and I could finally start reading a bit more fluently. There is a lot of multilingual signage around Delhi. Road markings are usually written in four languages - Hindi, English, Punjabi and Urdu! So I sometimes challenge myself to read in Urdu without looking at the other texts. 
 
-Although only a few of these apply in my case here is a list of reasons I have come up for Hindi speakers to learn the Nastaliq script. 
+This has been quite a fulfilling endeavour. My granddad who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story. 
 
-1. Learning languages is fun.
-* It will be the easiest language you learn.
-* You will be able to read Persian and Arabic too. 
-* You should. You really should. The reason for you not learning it at school is political. It shouldn't have been. You can fix it with a few weeks effort.
+
+#### One language, two scripts
+Although learning a new language is always worthwhile it is specially true in the case of Hindi-Urdu. Ours is a language with two scripts. And scripts as opposed to languages are far easier to learn. You don't have to spend years getting the grammar right and you don't have to worry about getting the fluency by interacting with native speakers. Because you already are one!
+
+This is low hanging fruit and should be grabbed first. Here is a list of things that might tempt you to learn the script for Hindi/Urdu if you speak the language --
+
+1. Learning languages is fun. Although all you are learning is a new script some of the benefits still apply. 
+2. You can now read Urdu poems and pre-independence literature in the original script. Most of this is not transliterated. Translations to English are more common but they lose the charm.
+3. Make friends from across the border. Although online discussions in both countries now mostly happen in English.
+4. For learners of Urdu there is an added bonus - Persian and Arabic use similar scripts so you can kind of 'read' those languages too. There are more loan words in Hindi-Urdu from those languages than you realize.
+5. The reason for you not being taught both scripts at school is political. Fix that with a few weeks of work. 
       
+About six years ago I landed in UK for a masters degree in business management or something. I don't quite remember. I do remember however that my class had a bunch of people from India and Pakistan. All of us could understand each other without any effort. There were only a couple of words I learned that Pakistanis seemed to use more often - "Maslan?", "na kar". I have more trouble understanding Punjabi that is sometimes spoken in my home. In India everywhere outside of Delhi the languages are more foreign to me than the one Pakistanis spoke. And I was complimented many times by Punjabis from Pakistan -- "appki 'Urdu' badi saaf hai".
 
-
-
-About six years ago I landed in UK for a masters degree in business management or something. I don't quite remember. I do remember however that my class had a bunch of people from India (including me) and Pakistan. All of us could understand each other without any effort. There were only a couple of words I learned that Pakistanis seemed to use more often - "Maslan?", "na kar". I usually have more trouble understanding Punjabi that is sometimes spoken in my home. Leaving Delhi, almost everywhere else the language is more alien to me. 
-
-If you are one of half a billion people who understand Hindi or Urdu. I urge you to go an learn the other script for your language. I Well maybe not all. If you have the time and the inclination. This post is just some motivation to push you over the edge.
+If you are one of half a billion people who understand Hindi or Urdu. I urge you to go and learn the other script for your language. 
 
 Our language Urdu-Hindi is beautiful. I know this because for a few years I didn't have many people I could speak in Hindi with on a regular basis. Things are easier to express in Hindi-Urdu and no matter how much of a 'angrez-ki-aulad'[^2] you are, for some things Hindi will remain the perfect language. 
-
-So here is my pitch for you learning the 'other' script for the language you already speak.
 
 ~WIP~
 

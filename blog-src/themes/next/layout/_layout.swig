@@ -12,7 +12,7 @@
     {% include '_third-party/analytics/index.swig' %}
 
     <!-- Bigfoot footers-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bigfoot/2.1.4/bigfoot-number.min.css"></link>
+    <link rel="stylesheet" href="/libs/bigfoot/bigfoot-number.css"></link>
         
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,9 +45,6 @@
           <div class="content-wrap">
             <div id="content" class="content">
               {% block content %}{% endblock %}
-              <a href="/blog/archive">Archive</>
-              <a href="/blog/categories">Categories</>
-              <a href="/blog/tags">Tags</>
             </div>
           </div>
           {% if theme.sidebar.display !== 'remove' %}
@@ -57,6 +54,11 @@
       </main>
       <div class="row footer">
         <div class="col-12">
+          <div class="float-right">
+            <a href="/blog/archives">Archive</a> | 
+            <a href="/blog/categories">Categories</a> | 
+            <a href="/blog/tags">Tags</a>
+          </div>
           <h5 class="text-muted">Find me on the Internet</h5>
           <ul class="social">
             <li class="cell cell-6">
@@ -165,9 +167,36 @@
     {% include '_third-party/scroll-cookie.swig' %}
     {% include '_third-party/exturl.swig' %}
 
-    
+    <script src="/libs/jquery/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <!-- Bigfoot footers-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bigfoot/2.1.4/bigfoot.min.js"></script>
-    <script type="text/javascript" src="/js/client.js">
+    <script type="text/javascript" src="/libs/bigfoot/bigfoot.min.js"></script>
+    <!--<script type="text/javascript" src="/js/client.js">-->
+    <script>
+      var bigfoot = $.bigfoot(
+          {
+          activateOnHover: true
+          }
+      );
+      $.bigfoot();
+      </script>
+      <script>
+      // Creates Captions from Alt tags
+      $("div.post-body").children("p").children('img').each(
+          function() {
+          // Let's put a caption if there is one
+          if ($(this).attr("alt")) {
+              $(this).wrap(
+                  '<figure class="image"></figure>'
+              ).after(
+                  '<figcaption>' +
+                  $(this).attr(
+                      "alt") +
+                  '</figcaption>'
+              );
+          }
+      });
+    </script>
   </body>
 </html>
