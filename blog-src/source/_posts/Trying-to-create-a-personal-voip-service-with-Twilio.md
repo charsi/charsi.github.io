@@ -37,10 +37,10 @@ I was also under the impression that Twilio needs a separate service which I'd n
 First step was to have calls to my Twilio number forwarded to the URI for my SIP extension from Callcentric. 
 On my second attempt with Twilio I got things working. However there were a few issues along the way. I used Stack-Overflow to look for solutions to each and got prompt replies from Twilio staff. It took a number of hours to figure things out. But I persevered because I figured there is a gap in the marked and I could conceivably build a viable service of my own using Twilio. Here are the issues I faced and links to Stack Overflow questions I created to try and resolve them -
 
-* Twilio doesn't work with SIP URIs which use SRV records for load balancing. [SO](https://stackoverflow.com/questions/48160769/)
+* Twilio doesn't work with SIP URIs which use SRV records for load balancing. [stackoverflow.com/questions/48160769](https://stackoverflow.com/questions/48160769/)
 
-* Twilio can't do multi-ring with phone numbers and SIP addresses at the same time. [SO](https://stackoverflow.com/questions/48158991)
-* Twilio answers every call. Even ones that go unanswered at the other end. [SO](https://stackoverflow.com/questions/48175352)
+* Twilio can't do multi-ring with phone numbers and SIP addresses at the same time. [stackoverflow.com/questions/48158991](https://stackoverflow.com/questions/48158991)
+* Twilio answers every call. Even ones that go unanswered at the other end. [stackoverflow.com/questions/48175352](https://stackoverflow.com/questions/48175352)
 
 As a workaround for the first issue I wrote a small function (which uses nodejs syntax) to query SRV records for callcentric's SIP host.
 For the second one I sidestepped the issue by forwarding to one SIP URI only - My callcentric extension. From there I could set up multiring using their [call treatments](https://www.callcentric.com/features/call_treatments).

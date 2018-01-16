@@ -27,17 +27,34 @@
       <div class="row header">
         <div class="col-12">
           <ul class="nav nav-pills float-right">
-            <li class="nav-item passive"><a class="nav-link" href="/blog" title="CV">Blog</a></li>
+            <li class="nav-item passive"><a class="nav-link active" href="/blog" title="CV">Blog</a></li>
             <li class="nav-item passive"><a class="nav-link" href="/projects" title="Projects">Projects</a></li>
           </ul>
           <h3 class="text-muted"><a href="/">Nishil Kohli</a></h3>
         </div>
       </div> <!-- /header -->
+      {% set container_class = "container " %}
+      {% if theme.sidebar.position %}
+      {% set container_class = container_class + 'sidebar-position-' + theme.sidebar.position %}
+      {% endif %}
+
+    
+    
+      <main id="main" class="main">
+        <div class="main-inner">
           <div class="content-wrap">
             <div id="content" class="content">
               {% block content %}{% endblock %}
+              <a href="/blog/archive">Archive</>
+              <a href="/blog/categories">Categories</>
+              <a href="/blog/tags">Tags</>
             </div>
           </div>
+          {% if theme.sidebar.display !== 'remove' %}
+          {% block sidebar %}{% endblock %}
+          {% endif %}
+        </div>
+      </main>
       <div class="row footer">
         <div class="col-12">
           <h5 class="text-muted">Find me on the Internet</h5>
@@ -98,6 +115,7 @@
           <p><small>&copy; 2018 Nishil Kohli</small></p>
         </div>
       </div>
+    </div>
       <!--<footer id="footer" class="footer">
         <div class="footer-inner">
           {{ partial('_partials/footer.swig', {}, {cache: theme.cache.enable}) }}
@@ -105,15 +123,7 @@
           {% block footer %}{% endblock %}
         </div>
       </footer>-->    
-    {% set container_class = "container " %}
-      {% if theme.sidebar.position %}
-      {% set container_class = container_class + 'sidebar-position-' + theme.sidebar.position %}
-      {% endif %}
-
     
-    {% if theme.sidebar.display !== 'remove' %}
-          {% block sidebar %}{% endblock %}
-          {% endif %}
 
 
     {% if not theme.sidebar.b2t %}
