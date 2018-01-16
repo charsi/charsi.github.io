@@ -14,7 +14,7 @@ A few years ago I tried to learn to read Urdu. Since it is basically the same la
 
 I left it at that until last year when I moved back to Delhi. I took some classes at [Zabaan](http://www.zabaan.com). This helped a lot and I could finally start reading a bit more fluently. There is a lot of multilingual signage around Delhi. Road markings are usually written in four languages - Hindi, English, Punjabi and Urdu! So I sometimes challenge myself to read in Urdu without looking at the other texts. 
 
-This has been quite a fulfilling endeavour. My granddad who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story. 
+This has been quite a fulfilling endeavour. My grandfather who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story. 
 
 
 #### One language, two scripts
