@@ -20,9 +20,9 @@
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             {{ __('sidebar.toc') }}
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            {{ __('sidebar.overview') }}
-          </li>
+          <!--<li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            {#{ __('sidebar.overview') }#}
+          </li>-->
         </ul>
       {% endif %}
 

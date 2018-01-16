@@ -9,9 +9,9 @@ tags:
 
 category: Other Stuff
 ---
-A few years ago I tried to learn to read Urdu. It is basically the same language as Hindi with a different script so I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few days/weeks I could just about recognize a few letters and read some shop signs written in Urdu around Luton[^:1].
+A few years ago I tried to learn to read Urdu. It is basically the same language as Hindi with a different script so I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.
 
-I left it at that until last year when I moved back to India. I took some classes to learn the Urdu script from scratch. And I can now easily read signs around Delhi that are written in Urdu. Not terribly useful as on the same board the text is repeated in two other languages I can read. But it has still been quite a fulfilling endeavour. My granddad who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story. 
+I left it at that until last year when I moved back to India. I took some classes at [Zabaan](zabaan.com). And I can now easily read signs around Delhi that are written in Urdu. Not terribly useful as on the same board the text is repeated in two other languages I can read. But it has still been quite a fulfilling endeavour. My granddad who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story. 
 
 Although only a few of these apply in my case here is a list of reasons I have come up for Hindi speakers to learn the Nastaliq script. 
 
