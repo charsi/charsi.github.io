@@ -1,5 +1,5 @@
 ---
-title: My experiments with urdu
+title: My experiments with Urdu
 date: 2017-08-20 01:51:02
 tags: 
   - urdu

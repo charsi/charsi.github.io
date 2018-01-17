@@ -1,9 +1,9 @@
 ---
-title: How to get stable fast and unlimited internet in India
+title: Redundant internet using a Tomato capable router
 tags:
   - india
   - internet
-permalink: how-to-get-stable-fast-and-unlimited-internet-in-india
+permalink: redundant-internet-using-tomato-capable-router
 id: 4
 updated: '2017-09-12 08:54:25'
 date: 2017-03-09 21:54:06
@@ -12,7 +12,7 @@ category: Technology
 
 ![](./tomato-1.jpg)
 
-TLDR; Get a tomato-capable router. Use it to fuse connections from two ISPs together
+TLDR; Get a tomato-capable router. Use its multi-WAN function to fuse connections from two ISPs together
 ### Rant 
 Internet situation in India is bad. I am currently living in New Delhi but was based in UK for the last 5 years. I had got used to 50mbps and even 100mbps unlimited connections. After moving back I was a bit surprised to learn things hadn't moved on much at all since I left. Only a couple of ISPs (Airtel and MTNL) in Delhi were capable of providing stable connections. Fast, unlimited plans were nowhere to be found. I was frequently paying more than Rs4,000 per month for internet, due to all the additional data I was using. This was on Airtel's 8mbps plan which came with a 80GB 'FUP'[^1]. I was paying far less for completely unlimited 50mbps/100mbps plans back in UK!
 
