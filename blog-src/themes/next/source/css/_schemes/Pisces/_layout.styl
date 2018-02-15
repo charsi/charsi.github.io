@@ -58,7 +58,6 @@
 }
 
 .content-wrap {
-  float: right;
   box-sizing: border-box;
   padding: $content-desktop-padding;
   width: $content-desktop;
@@ -66,6 +65,7 @@
   min-height: 700px;
   box-shadow: $box-shadow-inner;
   border-radius: $border-radius-inner;
+  width: 100%;
 
   +tablet() {
     width: 100%;
@@ -87,6 +87,7 @@
   width: $sidebar-desktop;
   background: $body-bg-color;
   box-shadow: none;
+  display:none;
 
   +tablet() {
     display: none;

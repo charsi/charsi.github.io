@@ -40,10 +40,10 @@
 
     
     
-      <main id="main" class="main">
-        <div class="main-inner">
+      <main id="main" class="row main ">
+        <div class="main-inner col-12">
           <div class="content-wrap">
-            <div id="content" class="content">
+            <div id="content " class="content">
               {% block content %}{% endblock %}
             </div>
           </div>
