@@ -12,14 +12,14 @@
     {% include '_third-party/analytics/index.swig' %}
 
     <!-- Bigfoot footers-->
-    <link rel="stylesheet" href="/libs/bigfoot/bigfoot-number.css"></link>
+    <link rel="stylesheet" href="{{ url_for(theme.js) }}/libs/bigfoot/bigfoot-number.css" />
         
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Blog | nishil.in</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="{{ url_for(theme.js) }}/libs/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="{{ url_for(theme.js) }}/libs/css/style.css" rel="stylesheet">
   </head>
 
   <body itemscope itemtype="http://schema.org/WebPage" lang="{{ page.lang || page.language || config.language }}">
@@ -167,12 +167,14 @@
     {% include '_third-party/scroll-cookie.swig' %}
     {% include '_third-party/exturl.swig' %}
 
-    <script src="/libs/jquery/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for(theme.js) }}/libs/jquery/jquery-3.2.1.slim.min.js"></script>
+    
+    <!--<script src="/blog/libs/jquery/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <!-- Bigfoot footers-->
-    <script type="text/javascript" src="/libs/bigfoot/bigfoot.min.js"></script>
-    <!--<script type="text/javascript" src="/js/client.js">-->
+    <script type="text/javascript" src="{{ url_for(theme.js) }}/libs/bigfoot/bigfoot.min.js"></script>
+    <!--<script type="text/javascript" src="/blog/libs/bigfoot/bigfoot.min.js"></script>-->
     <script>
       var bigfoot = $.bigfoot(
           {
