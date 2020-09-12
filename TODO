@@ -1,0 +1,6 @@
+- add dates to posts
+- fix footer links and popups (replace bigfoot.js)
+- create html file names from permalink property
+  , not the .md filename
+- Categories page
+- separate tech and non-tech RSS feeds

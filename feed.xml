@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 12 Sep 2020 15:52:07 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2020 16:09:12 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Trying to create a personal voip service with Twilio]]></title>
@@ -254,15 +254,15 @@ You will need to come tomorrow.</em></p>
 
 <p>I got an Uber at 7.30. Caught the flight like a normal person and was in Bhutan at 1PM Bhutan time[^1].</p>
 
-<p><img src="./DSC06955.JPG" alt="That is Everest in the centre" /></p>
+<p><img src="/images/bhutan-trip-log-ii/DSC06955.JPG" alt="That is Everest in the centre" /></p>
 
 <p>Entering Bhutan by Air has the added advantage that you don&rsquo;t have to go through the paperwork for visa on arrival. Just get your passport stamped and you are done. I landed in Paro which is without doubt the most beautiful airport I have ever seen. Here is a pic from my last trip -</p>
 
-<p><img src="./DSC06533.JPG" alt="Paro Airport" /></p>
+<p><img src="/images/bhutan-trip-log-ii/DSC06533.JPG" alt="Paro Airport" /></p>
 
 <p>Got a taxi to Thimpu, Bhutan&rsquo;s capital city. Paid Nu.1,000 [^2] for the 1.5 hr drive. Shared taxis go for Nu.250 but you need people to share with. Everybody on my flight seemed to have arrangements with their travel agents.</p>
 
-<p><img src="./Screenshot-from-2017-04-21-09-34-42.png" alt="On the way to Thimpu from Paro" /></p>
+<p><img src="/images/bhutan-trip-log-ii/Screenshot-from-2017-04-21-09-34-42.png" alt="On the way to Thimpu from Paro" /></p>
 
 <p>My first priority in Thimpu was to get a bus ticket to Bumthang and permits to travel there. I went straight to the bus depot to get a bus ticket first.</p>
 
@@ -350,7 +350,7 @@ This trip won&rsquo;t be a waste.</p>
 
 <p>Just before the end of the journey, near the top of ___pass we had to make an unscheduled stop. A big flatback? truck carrying a heavy bulldozer on it had got stuck on a very tight turning. The rear tires were on the edge of the road which was crumbling under the weight. The truck and the bulldozer on top were tilted more than 20 degrees towards the cliff. The front was pressed against the mountain side  so any further movement would have tilted it more. Precarious - the word was invented for such situations.</p>
 
-<p><img src="./IMG_20161023_190430.jpg" alt="Best pic I could take of the truck and the bulldozer" /></p>
+<p><img src="/images/bhutan-trip-log-ii/IMG_20161023_190430.jpg" alt="Best pic I could take of the truck and the bulldozer" /></p>
 
 <p>I started calculating how long it would take to get back to Thimpu from here although eighty percent of the journey was complete.
 It was pitch dark by now and a crowd had gathered with their mobile flash lights to help the couple of guys who were actually working on a solution. There were a couple of buses and a few cars stuck on both sides. Somebody climbed a few feet into the valley with a large jerry can and another person connected it to the truck&rsquo;s fuel tank with a hose pipe.
@@ -558,7 +558,7 @@ If you already have a TB or two of Movies and TV shows on your laptop or an exte
 
 <p>Middle path between a ready-made NAS and a custom build. This is also the option I went with. These devices are marketed as general purpose servers(don&rsquo;t get scared by that word. Servers are just computers made for 24x7 service) and usually don&rsquo;t come with an OS.
 But as they are servers they are designed for 24x7 operation while being small and efficient. Those are exactly the things you want in a NAS too. And afterall a NAS is also kind of a server that kicks ass at serving files. As a tradeoff you need to spend some time installing a OS and setting it up the way you like.
-<img src="./proliant_microserver.jpg" alt="" />
+<img src="/images/joys-of-network-attached-storage/proliant_microserver.jpg" alt="" />
 <a href="https://www.amazon.co.uk/dp/B005LRCASM">HP proliant microserver N40L</a></p>
 
 <p>It is small - looks more like a subwoofer than a PC .
@@ -715,8 +715,8 @@ Software - FreeNAS + ZFS</p>
 <p>[^1]: Very much like normal windows but with some added server jazz
 [^2]: Two if you replace the CD drive with a HDD too and a few more over USB</p>
 ]]></description>
-        <link>https://nishil.in/posts/the-joys-of-network-attached-storage.html</link>
-        <guid>https://nishil.in/posts/the-joys-of-network-attached-storage.html</guid>
+        <link>https://nishil.in/posts/joys-of-network-attached-storage.html</link>
+        <guid>https://nishil.in/posts/joys-of-network-attached-storage.html</guid>
         <pubDate>Sun, 16 Apr 2017 02:37:09 -0800</pubDate>
       </item>
     
@@ -886,7 +886,7 @@ http {
     
       <item>
         <title><![CDATA[Redundant internet using a Tomato capable router]]></title>
-        <description><![CDATA[<p><img src="./tomato-1.jpg" alt="" /></p>
+        <description><![CDATA[<p><img src="/images/redundant-internet-using-tomato-capable-router/tomato-1.jpg" alt="" /></p>
 
 <p>TLDR; Get a tomato-capable router. Use its multi-WAN function to fuse connections from two ISPs together</p>
 
@@ -914,12 +914,12 @@ I had wisely not disconnected Airtel yet. So whenever Excitel went down I could 
 <li>Wait for the firmware to be installed and pray your router doesn’t get bricked.</li>
 <li>Once the new firmware is installed go to <code>192.168.1.1</code> and navigate to <code>Advanced &gt; VLAN</code> on the sidebar</li>
 <li>Uncheck port 1 for <code>LAN(br0)</code></li>
-<li>On the last row select &lsquo;WAN2&rsquo; from the drop-down and select port 1. Click Add. This will designate Port 1 to be used as your second WAN port. Your screen should be looking like the screenshot below now. <img src="./Screenshot_1.png" alt="" /></li>
+<li>On the last row select &lsquo;WAN2&rsquo; from the drop-down and select port 1. Click Add. This will designate Port 1 to be used as your second WAN port. Your screen should be looking like the screenshot below now. <img src="/images/redundant-internet-using-tomato-capable-router/Screenshot_1.png" alt="" /></li>
 <li>Click save and navigate to <code>Basic &gt; Network</code></li>
 <li>Select &lsquo;2WAN&rsquo; for number of WAN ports option.</li>
 <li>Configure WAN 1 details as provided by your ISP. Connection type would probably be DHCP or pppoe with a user name and password.</li>
 <li>For WAN 2 set the connection type to DHCP and load balance weight to 0.</li>
-<li>Configure your wifi name and password on the same page. Click save and wait for the router to reboot. <img src="./Screenshot_3.png" alt="" /></li>
+<li>Configure your wifi name and password on the same page. Click save and wait for the router to reboot. <img src="/images/redundant-internet-using-tomato-capable-router/Screenshot_3.png" alt="" /></li>
 <li>Connect an ethernet cable from one of the LAN ports on your Airtel/MTNL modem to port 1 on the tomato router.</li>
 <li>Done</li>
 </ul>

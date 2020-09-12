@@ -59,15 +59,15 @@ Right so I went straight to CP from the airport. Got the ticket rescheduled. Pai
 
 I got an Uber at 7.30. Caught the flight like a normal person and was in Bhutan at 1PM Bhutan time[^1]. 
 
-![That is Everest in the centre](./DSC06955.JPG)
+![That is Everest in the centre](/images/bhutan-trip-log-ii/DSC06955.JPG)
 
 Entering Bhutan by Air has the added advantage that you don't have to go through the paperwork for visa on arrival. Just get your passport stamped and you are done. I landed in Paro which is without doubt the most beautiful airport I have ever seen. Here is a pic from my last trip -
 
-![Paro Airport](./DSC06533.JPG)
+![Paro Airport](/images/bhutan-trip-log-ii/DSC06533.JPG)
  
 Got a taxi to Thimpu, Bhutan's capital city. Paid Nu.1,000 [^2] for the 1.5 hr drive. Shared taxis go for Nu.250 but you need people to share with. Everybody on my flight seemed to have arrangements with their travel agents. 
 
-![On the way to Thimpu from Paro](./Screenshot-from-2017-04-21-09-34-42.png)
+![On the way to Thimpu from Paro](/images/bhutan-trip-log-ii/Screenshot-from-2017-04-21-09-34-42.png)
 
 
 My first priority in Thimpu was to get a bus ticket to Bumthang and permits to travel there. I went straight to the bus depot to get a bus ticket first. 
@@ -153,7 +153,7 @@ The bus only made one scheduled 20 min stop. A few kms after pele-la everybody h
 
 Just before the end of the journey, near the top of ___pass we had to make an unscheduled stop. A big flatback? truck carrying a heavy bulldozer on it had got stuck on a very tight turning. The rear tires were on the edge of the road which was crumbling under the weight. The truck and the bulldozer on top were tilted more than 20 degrees towards the cliff. The front was pressed against the mountain side  so any further movement would have tilted it more. Precarious - the word was invented for such situations.
 
-![Best pic I could take of the truck and the bulldozer](./IMG_20161023_190430.jpg)
+![Best pic I could take of the truck and the bulldozer](/images/bhutan-trip-log-ii/IMG_20161023_190430.jpg)
 
 I started calculating how long it would take to get back to Thimpu from here although eighty percent of the journey was complete.
 It was pitch dark by now and a crowd had gathered with their mobile flash lights to help the couple of guys who were actually working on a solution. There were a couple of buses and a few cars stuck on both sides. Somebody climbed a few feet into the valley with a large jerry can and another person connected it to the truck's fuel tank with a hose pipe. 
