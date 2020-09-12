@@ -4,3 +4,6 @@
   , not the .md filename
 - Categories page
 - separate tech and non-tech RSS feeds
+- auto detect dark mode from user's browser settings
+- resize images (css property?)
+- add support for image captions
