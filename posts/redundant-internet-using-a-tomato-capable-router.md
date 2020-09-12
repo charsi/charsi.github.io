@@ -10,7 +10,7 @@ date: 2017-03-09 21:54:06
 category: Technology
 ---
 
-![](./tomato-1.jpg)
+![](/images/redundant-internet-using-tomato-capable-router/tomato-1.jpg)
 
 TLDR; Get a tomato-capable router. Use its multi-WAN function to fuse connections from two ISPs together
 ### Rant 
@@ -31,12 +31,12 @@ Here are the steps to follow if you find yourself in a similar situation -
 - Wait for the firmware to be installed and pray your router doesn’t get bricked. 
 - Once the new firmware is installed go to `192.168.1.1` and navigate to `Advanced > VLAN` on the sidebar
 - Uncheck port 1 for `LAN(br0)`
-- On the last row select 'WAN2' from the drop-down and select port 1. Click Add. This will designate Port 1 to be used as your second WAN port. Your screen should be looking like the screenshot below now. ![](./Screenshot_1.png)
+- On the last row select 'WAN2' from the drop-down and select port 1. Click Add. This will designate Port 1 to be used as your second WAN port. Your screen should be looking like the screenshot below now. ![](/images/redundant-internet-using-tomato-capable-router/Screenshot_1.png)
 - Click save and navigate to `Basic > Network`
 - Select '2WAN' for number of WAN ports option.
 - Configure WAN 1 details as provided by your ISP. Connection type would probably be DHCP or pppoe with a user name and password.
 - For WAN 2 set the connection type to DHCP and load balance weight to 0. 
-- Configure your wifi name and password on the same page. Click save and wait for the router to reboot. ![](./Screenshot_3.png)
+- Configure your wifi name and password on the same page. Click save and wait for the router to reboot. ![](/images/redundant-internet-using-tomato-capable-router/Screenshot_3.png)
 - Connect an ethernet cable from one of the LAN ports on your Airtel/MTNL modem to port 1 on the tomato router. 
 - Done
 

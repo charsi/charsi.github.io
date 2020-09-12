@@ -87,7 +87,7 @@ Cons
 
 Middle path between a ready-made NAS and a custom build. This is also the option I went with. These devices are marketed as general purpose servers(don't get scared by that word. Servers are just computers made for 24x7 service) and usually don't come with an OS. 
 But as they are servers they are designed for 24x7 operation while being small and efficient. Those are exactly the things you want in a NAS too. And afterall a NAS is also kind of a server that kicks ass at serving files. As a tradeoff you need to spend some time installing a OS and setting it up the way you like.
-![](./proliant_microserver.jpg)
+![](/images/joys-of-network-attached-storage/proliant_microserver.jpg)
 [HP proliant microserver N40L](https://www.amazon.co.uk/dp/B005LRCASM)
 
 It is small - looks more like a subwoofer than a PC .
