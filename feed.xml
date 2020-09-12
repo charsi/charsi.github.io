@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nishil Kohli</title>
+    <description></description>
+    <link>https://nishil.in</link>
+    <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Sep 2020 15:23:24 -0700</lastBuildDate>
+    
+      <item>
+        <title><![CDATA[Trying to create a personal voip service with Twilio]]></title>
+        <description><![CDATA[<h4>Background</h4>
+
+<p>I have recently moved to Canada and decided to go with a data only plan on my phone because voice plans are quite expensive here. A standard voice plan is around $50-$60 with around 2GB of data. This kind of money can buy you <a href="https://www.uswitch.com/mobiles/iphone_deals/">plans</a> which include an Iphone in the UK.</p>
+
+<p>The cost of voice plans is a bit surprising because calling rates for VOIP are usually the cheapest for USA/Canada. And companies like Google Voice offer free calling in both countries. But I guess the massive size of Canada and the sparse population increase the cost of building the wireless infrastructure needed.</p>
+
+<p>My current solution for staying connected in Canada uses a combination of Google voice which I use for outbound calls. And a local Canadian number for $3/month from <a href="https://www.callcentric.com/">Callcentric</a> which forwards calls to my Google Voice number and a VOIP phone at home. So I can answer the call on my mobile if I am out, or on the VOIP phone if I am home.</p>
+
+<p>This is working flawlessly but there are a few drawbacks.</p>
+
+<ul>
+<li>Callcentric does not support SMS on its numbers so there is no way for me to receive texts.</li>
+<li>Outbound calls from Google voice show a USA number instead of my Canadian number.</li>
+</ul>
+
+<p>The second issue I can live with. I can always use a VOIP app such as <a href="https://play.google.com/store/apps/details?id=org.linphone">Linphone</a> or <a href="https://play.google.com/store/apps/details?id=com.grandstream.wave">Grandstream Wave</a> on my mobile when I want my Canadian number to show as my caller ID.</p>
+
+<p>The lack of SMS problematic however. Numbers in Canada(and USA), unlike UK and India look the same for mobiles and landlines. This causes most people you call to assume they can text you back. There are some online services such as Skype that only verify the ownership of a number via text messages.</p>
+
+<p>So to fix this I looked for alternatives to callcentric that also offer SMS. <a href="https://voip.ms/">Voip.ms</a> fits the bill perfectly. However, to activate an account with them I was asked to submit a photo-ID which I currently don&rsquo;t have one of in Canada. And I don&rsquo;t like the idea of it anyway. I tried giving them my provisional driving license but that didn&rsquo;t work for them.</p>
+
+<h4>Enter <a href="https://www.twilio.com/">Twilio</a>.</h4>
+
+<p>I have tried using Twilio before but their service is geared towards enterprise and people looking to create services using them as a backend. They have a crazy amount of features so figuring out how to setup a basic call forward through their website can be daunting.</p>
+
+<p>I was also under the impression that Twilio needs a separate service which I&rsquo;d need to host myself. However, they have recently added the ability to host business logic on their platform itself using <a href="https://www.twilio.com/functions">Twilio functions</a>.</p>
+
+<h5>Voice</h5>
+
+<p>First step was to have calls to my Twilio number forwarded to the URI for my SIP extension from Callcentric.
+On my second attempt with Twilio I got things working. However there were a few issues along the way. I used Stack-Overflow to look for solutions to each and got prompt replies from Twilio staff. It took a number of hours to figure things out. But I persevered because I figured there is a gap in the marked and I could conceivably build a viable service of my own using Twilio. Here are the issues I faced and links to Stack Overflow questions I created to try and resolve them -</p>
+
+<ul>
+<li><p>Twilio doesn&rsquo;t work with SIP URIs which use SRV records for load balancing. <a href="https://stackoverflow.com/questions/48160769/">stackoverflow.com/questions/48160769</a></p></li>
+
+<li><p>Twilio can&rsquo;t do multi-ring with phone numbers and SIP addresses at the same time. <a href="https://stackoverflow.com/questions/48158991">stackoverflow.com/questions/48158991</a></p></li>
+
+<li><p>Twilio answers every call. Even ones that go unanswered at the other end. <a href="https://stackoverflow.com/questions/48175352">stackoverflow.com/questions/48175352</a></p></li>
+</ul>
+
+<p>As a workaround for the first issue I wrote a small function (which uses nodejs syntax) to query SRV records for callcentric&rsquo;s SIP host.
+For the second one I sidestepped the issue by forwarding to one SIP URI only - My callcentric extension. From there I could set up multiring using their <a href="https://www.callcentric.com/features/call_treatments">call treatments</a>.</p>
+
+<p>The last issue however is a deal breaker. For calls that go unanswered, both the caller and the owner of the number(me, in this case) will get billed. It will also be unusual for callers to see the calls being established (that is when the call timer starts) while still hearing it ring until the call actually gets picked up.</p>
+
+<p><del>So currently it seems Twilio is not the right provider for building a &lsquo;seamless&rsquo; call forwarding service.</del></p>
+
+<p>A <a href="https://stackoverflow.com/a/48178707">response</a> to my Stack Overflow question regarding the last issue gave me a solution. All I needed was to add a <a href="https://www.twilio.com/docs/api/twiml/dial#attributes-answer-on-bridge">answerOnBridge</a> attribute in my code. This makes Twilio wait for the outbound call to be answered before it connects the incoming call. Perfect.</p>
+
+<p>This is my function for forwarding calls to my SIP URI. I still need to implement prioritisation according to SRV record priorities and weights.
+<script src="https://gist.github.com/charsi/222e6e24577d61d70afac6406d54973d.js"></script></p>
+
+<h5>Messaging</h5>
+
+<p>Now that the phone calls are working correctly I need to setup SMS. The easiest way to handle this is via emails. However I also want to implement a way to integrate with a open standards(<a href="https://xmpp.org/">XMPP</a> for example) chat protocol.</p>
+
+<p>To send incoming SMS messages to my email I grabbed some initial code from this reddit post. After a few modifications I had email forwards working perfectly.
+This is my function that forwards SMS-</p>
+
+<p><script src="https://gist.github.com/charsi/d2f377f559519bbbe287f12ef63daf0e.js"></script></p>
+
+<h5>To-Do</h5>
+
+<ul>
+<li>Add SMS capabilities to my number</li>
+<li>Build a product out of the whole thing. Profit. Retire.</li>
+<li>Explore possibilities with Twilio alternatives such as <a href="https://www.plivo.com/">Pvilo</a> and <a href="https://www.sinch.com/">Sinch</a>. </li>
+</ul>
+]]></description>
+        <link>https://nishil.in/posts/trying-to-create-a-personal-voip-service-with-twilio.html</link>
+        <guid>https://nishil.in/posts/trying-to-create-a-personal-voip-service-with-twilio.html</guid>
+        <pubDate>Tue, 09 Jan 2018 14:48:53 -0800</pubDate>
+      </item>
+    
+      <item>
+        <title><![CDATA[My experiments with Urdu]]></title>
+        <description><![CDATA[<h3>Learning Urdu</h3>
+
+<p>A few years ago I tried to learn to read Urdu. Since it is basically the same language as Hindi with a different script, I figured it won&rsquo;t be too hard. I was living with a few Pakistani friends at the time but they didn&rsquo;t prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.</p>
+
+<p>I left it at that until last year when I moved back to Delhi. I took some classes at <a href="http://www.zabaan.com">Zabaan</a>. This helped a lot and I could finally start reading a bit more fluently. There is a lot of multilingual signage around Delhi. Road markings are usually written in four languages - Hindi, English, Punjabi and Urdu! So I sometimes challenge myself to read in Urdu without looking at the other texts.</p>
+
+<p>This has been quite a fulfilling endeavour. My grandfather who could read and write Urdu passed away last year but before then I was able to show him I was picking up the language. He was probably more confused than the Pakistanis about my motives but that is a different story.</p>
+
+<h4>One language, two scripts</h4>
+
+<p>Although learning a new language is always worthwhile it is specially true in the case of Hindi-Urdu. Ours is a language with two scripts. And scripts as opposed to languages are far easier to learn. You don&rsquo;t have to spend years getting the grammar right and you don&rsquo;t have to worry about getting the fluency by interacting with native speakers. Because you already are one!</p>
+
+<p>This is low hanging fruit and should be grabbed first. Here is a list of things that might tempt you to learn the script for Hindi/Urdu if you speak the language &ndash;</p>
+
+<ol>
+<li>Learning languages is fun. Although all you are learning is a new script some of the benefits still apply.</li>
+<li>You can now read Urdu poems and pre-independence literature in the original script. Most of this is not transliterated. Translations to English are more common but they lose the charm.</li>
+<li>Make friends from across the border. Although online discussions in both countries now mostly happen in English.</li>
+<li>For learners of Urdu there is an added bonus - Persian and Arabic use similar scripts so you can kind of &lsquo;read&rsquo; those languages too. There are more loan words in Hindi-Urdu from those languages than you realize.</li>
+<li>The reason for you not being taught both scripts at school is political. Fix that with a few weeks of work.</li>
+</ol>
+
+<p>About six years ago I landed in UK for a masters degree in business management or something. I don&rsquo;t quite remember. I do remember however that my class had a bunch of people from India and Pakistan. All of us could understand each other without any effort. There were only a couple of words I learned that Pakistanis seemed to use more often - &ldquo;Maslan?&rdquo;, &ldquo;na kar&rdquo;. I have more trouble understanding Punjabi that is sometimes spoken in my home. In India everywhere outside of Delhi the languages are more foreign to me than the one Pakistanis spoke. And I was complimented many times by Punjabis from Pakistan &ndash; &ldquo;appki &lsquo;Urdu&rsquo; badi saaf hai&rdquo;.</p>
+
+<p>If you are one of half a billion people who understand Hindi or Urdu. I urge you to go and learn the other script for your language.</p>
+
+<p>Our language Urdu-Hindi is beautiful. I know this because for a few years I didn&rsquo;t have many people I could speak in Hindi with on a regular basis. Things are easier to express in Hindi-Urdu and no matter how much of a &lsquo;angrez-ki-aulad&rsquo;[^2] you are, for some things Hindi will remain the perfect language.</p>
+
+<p>~WIP~</p>
+
+<p>[^1]: Do whatever is humanly possible to avoid going to this place. It is awful.
+[^2]: Prime example of what this sentence is referring to.</p>
+]]></description>
+        <link>https://nishil.in/posts/my-experiments-with-urdu.html</link>
+        <guid>https://nishil.in/posts/my-experiments-with-urdu.html</guid>
+        <pubDate>Sun, 20 Aug 2017 01:51:02 -0800</pubDate>
+      </item>
+    
+      <item>
+        <title><![CDATA[Turn on/off appliances using a TV remote and Raspbery Pi]]></title>
+        <description><![CDATA[<p>Get a relay  like <a href="http://www.dx.com/p/arduino-2-channel-relay-shield-module-red-144140">this one</a>. I got a two channel one because I wanted to control two separate devices - the TV and some active speakers. Get a single channel one if you just want to to turn on/off one device. Insert the relay into an <a href="http://www.amazon.in/Philips-Surge-Spike-Guard-Metres/dp/B00TIJXCLI">extension</a>. I had to block off one socket to make room. Carefully rewire the sockets so they go via the relays. Make sure you connect mains across the normally open points on the relay.</p>
+
+<p>With the mains power isolated within the extension board I made a small opening and routed jumper cables out of the extension. The cables were connected to the pins on the relay and the other ends I connected these to the Raspberry pi&rsquo;s +5v, GND and GPIO 4, 17.</p>
+
+<p>I then wrote two small python scripts to toggle power for the speakers and the TV.</p>
+
+<p>I programmed my flirc USB to fire off f6 and f7 when red and green buttons on the tv remote are pressed and plugged it into the rpi.</p>
+
+<p>To have the rpi run the python scripts automatically when f6/f7 are pressed I had two options &ndash;</p>
+
+<p>xbindkeys
+This was dead easy to configure. I pasted the following in ~/.xbindkeysrc and I was done -</p>
+
+<pre><code># toggle speakers
+&quot;python2 speakerstoggle.py&quot;
+    Mod2 + F7
+
+# toggle tv
+&quot;python2 tvtoggle.py&quot;
+    Mod2 + F6
+</code></pre>
+
+<p>run <code>xbindkeys; xbindkeys</code> to reload xbindkeys.</p>
+
+<p>On the downside. This app needs x server running. This is wasted resource on a headless computer.</p>
+
+<p>I also couldn&rsquo;t figure out how to run <code>startx</code> on boot automatically.</p>
+
+<p>triggerhappy
+This is a daemon written for exactly my use case. Underpowered systems running in headless mode. The challenge was actually installing and getting it running on runeaudio(Archlinux based).</p>
+
+<p>After a number of tries and reinstalls this is what worked for me -</p>
+
+<ul>
+<li><code>pacman -Sy</code>  - update the repos</li>
+<li><code>pacman -S guile make gcc</code> install dependencies and build tools</li>
+<li><code>git clone https://github.com/wertarbyte/triggerhappy</code></li>
+<li><code>cd triggerhappy</code></li>
+<li><code>make</code></li>
+<li><code>make install</code></li>
+</ul>
+
+<p>I then uninstalled gcc and make since they were causing the pi to boot up very slowly.</p>
+
+<pre><code>pacman -Rns gcc make
+</code></pre>
+
+<p>I created a file /etc/triggerhappy/triggers.d/tv-speakers.conf (you can name this anything. All files from the folder are loaded by triggerhappy) and pasted the following -</p>
+
+<pre><code>KEY_F6 1 python2 /root/tvtoggle.py
+KEY_F7 1 python2 /root/speakerstoggle.py
+</code></pre>
+
+<p>you can test keycodes by running <code>thd -d /dev/input/*</code></p>
+
+<p>For some reason triggerhappy did not create a service for itself. I created one by creating a file called triggerhappy.service in /etc/systemd/system/ . I pasted the following in the file -</p>
+
+<pre><code>[Unit]
+Description=triggerhappy global hotkey daemon
+After=local-fs.target
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/thd --triggers /etc/triggerhappy/triggers.d/ --socket /run/$
+
+[Install]
+WantedBy=multi-user.target
+
+</code></pre>
+
+<p>and to enable the service</p>
+
+<p><code>systemctl enable triggerhappy.service</code></p>
+
+<p>All done!</p>
+]]></description>
+        <link>https://nishil.in/posts/turn-on-off-appliances-using-a-tv-remote-and-raspbery-pi.html</link>
+        <guid>https://nishil.in/posts/turn-on-off-appliances-using-a-tv-remote-and-raspbery-pi.html</guid>
+        <pubDate>Tue, 20 Jun 2017 01:51:02 -0800</pubDate>
+      </item>
+    
+      <item>
+        <title><![CDATA[Bhutan Trip Log II]]></title>
+        <description><![CDATA[<h2>Background</h2>
+
+<p>This was my second trip to Bhutan in as many months. I didn&rsquo;t plan to make two trips but it turned out that way. I only had a week or so to get to Bhutan, get my permits sorted to travel to central Bhutan, pick up my motorcycle and then ride through east Bhutan to Guwahati.</p>
+
+<p>Here are some lightly edited notes I jotted on my phone during this trip. I will try and sprinkle a few photos in between.</p>
+
+<p>Itinerary, Expenses at the end</p>
+
+<h2>The Trip</h2>
+
+<h3>Day <del>1</del> - not really</h3>
+
+<p><strong>TLDR</strong> - I miss my flight to Bhutan, reschedule it for next day.</p>
+
+<p>By now I am very good at packing at short notice. I have made a number of these trips in the last few months. My flight was at 10.15. So I woke up at 7, packed and got an Uber at 8.30. The journey to the airport should have taken 45 minutes with some heavy traffic. It took 1 hr due to very heavy traffic.</p>
+
+<p>At the Delhi&rsquo;s T3 -
+&gt;<em>Where&rsquo;s the Druk air desk?<br />
+They have already packed up sir.
+Where were they?
+Counter K.</em></p>
+
+<p>At counter K -
+&gt;<em>Hi sorry I am late.<br />
+Sorry the check in desk is closed.
+But the flight is still here surely you can put me on it?
+Sorry the check in desk is closed.
+But there&rsquo;s still 45 mins before it takes off!
+Sorry the check in desk is closed.
+But there must be something you can do?
+You&rsquo;ll have to reschedule your flight from our booking office in CP.
+I can&rsquo;t do it from here?
+No
+I can&rsquo;t do it online?
+No
+But the flight I have a ticket for is still here!
+You will need to come tomorrow.</em></p>
+
+<p>Right so I went straight to CP from the airport. Got the ticket rescheduled. Paid â‚¹3,500. Went home. Had lots of ice cream.</p>
+
+<h3>Day 1 - The Trip Actually Starts</h3>
+
+<p><strong>TLDR</strong> - I actually catch a flight to Bhutan. Can&rsquo;t get a bus ticket to Bumthang. But then I get it in the end.</p>
+
+<p>I got an Uber at 7.30. Caught the flight like a normal person and was in Bhutan at 1PM Bhutan time[^1].</p>
+
+<p><img src="./DSC06955.JPG" alt="That is Everest in the centre" /></p>
+
+<p>Entering Bhutan by Air has the added advantage that you don&rsquo;t have to go through the paperwork for visa on arrival. Just get your passport stamped and you are done. I landed in Paro which is without doubt the most beautiful airport I have ever seen. Here is a pic from my last trip -</p>
+
+<p><img src="./DSC06533.JPG" alt="Paro Airport" /></p>
+
+<p>Got a taxi to Thimpu, Bhutan&rsquo;s capital city. Paid Nu.1,000 [^2] for the 1.5 hr drive. Shared taxis go for Nu.250 but you need people to share with. Everybody on my flight seemed to have arrangements with their travel agents.</p>
+
+<p><img src="./Screenshot-from-2017-04-21-09-34-42.png" alt="On the way to Thimpu from Paro" /></p>
+
+<p>My first priority in Thimpu was to get a bus ticket to Bumthang and permits to travel there. I went straight to the bus depot to get a bus ticket first.</p>
+
+<p>At the ticket window -
+&gt;<em>Sorry, all full.<br />
+But there must be something you can do?
+No. You can book for Tuesday. (It was Friday)
+What about Sunday?
+All full.
+Monday?
+All full
+(Bollocks)</em></p>
+
+<p>I had an idea. Maybe I could book for destinations further ahead in East Bhutan - Mongar, Tashigang, Tashiyangtse.
+They were all full for the next day too. I did manage to buy one of the last tickets for Mongar as a backup plan. I planned to try and convince somebody to travel a day later and buy their ticket. But as this wasn&rsquo;t very likely to happen I went back to pleading with the ticket ladies some more. There were about 5-6 ticket windows open all selling tickets to different places in Bhutan.
+The lady at counter number 11 finally took pity - <em>&lsquo;come back later in the day, I will maybe have a solution for you&rsquo;</em>. Yay!. With those two less than reliable options of travel further I went to the permit office next. I had been there before so knew exactly what to do. I was in and out in 10 minutes. Had to come back in an hour to pick up the permit.</p>
+
+<p>I went in search of a hotel. The one I had stayed in last time was full. So after several stops at likely places to rest my head I finally arrived at the budget end of the spectrum. Tashi Delek - just about clean enough.. no handle on the commode flush but I think I can make it work. Nu.1,100 per night. Sold.
+Went back to the permit office and picked up the permit. And then back to the bus depot. The lady at counter 11 did some magic and found me a canceled ticket to Bumthang for the next day. Woohoo!. Looks like things are falling into place.</p>
+
+<p>The motorcycle still needed a separate permit but the transport office closed at 3 so I left figuring that out until after I reached Jakar (Bumthang).
+Back in the main town .. explored a bit. Found &lsquo;Ambience cafe&rsquo;. Good coffee, solid WiFi. Sandwiches a bit meh. But still. Called home.. yes khana Sahi chal Raha hai. I have a ticket!.. etc etc</p>
+
+<p>I found a local snack - Steamo - a bread dumpling that can be had with black chickpeas (Kaale cholle), spicy potatoes (refuse to call them curry potatoes as there was no gravy) or a couple of beef options.</p>
+
+<p>I bought a jacket and went back to the hotel - Facebook, ars technica etc etc. The bus left at 7.30am tomorrow. I set 3 alarms in my phone to go off at 5.30, 5.40, 5.50.
+I drift off and dream of things to come.</p>
+
+<h3>Day 2 - Starting troubles</h3>
+
+<p><strong>TLDR</strong> - I oversleep, miss my bus to Bumthang and again can&rsquo;t get a bus ticket.</p>
+
+<p>Oh shit, oh shit, oh shit. Its 10 am. The bus is long gone. I have just woken up. Grr. Why does this always happen to me? Why do I have to sleep like Kumbhkaran at the worst possible time.
+Okay so it&rsquo;s not that bad I tell myself. After all Thimpu is a very nice place to be. I like Thimpu. But I have a train ticket to go back to Delhi on 27th from Guwahati. And it takes at least 4 days to drive there from Bumthang. I would had just enough time to get there if I left today.
+Oh shit. Oh shit. Oh shit.</p>
+
+<p>At the bus depot the lady at counter 11 wasn&rsquo;t very happy. She didn&rsquo;t have more tickets for Bumthang till Wednesday now. But counter 10 still had some for Tuesday. I checked if I could still buy a ticket on the Mongar bus. No luck. I had returned the Mongar ticket yesterday and it had also been sold. So everything was sold out till Tuesday.</p>
+
+<p>I went back into Thumpu. Had some more steamo. Walked a bit. Then went upto Thumpu dzong. It&rsquo;s a beautiful dzong just 10 minutes outside main Thimpu town. I have seen a few of these by now. No point paying 300 to go in. I have stayed on the outside of lots of things that look nice to me from the outside. Sorry.</p>
+
+<p>Maybe I should go to that big golden Buddha statue next. It can be seen from everywhere in Thimpu. Yah but I have to pick up my big camera before I go there. Hmm, Nishil I know you won&rsquo;t make it out of that hotel if you go in now I tell myself. Yah probably.
+I go back to the hotel, some Pringles and other sorts of potato delights in hand.
+Facebook likes on the recently updated dp are around 30.. okay decent. No women though. Heh what did you expect dude? You&rsquo;ve got like 2 women on there that aren&rsquo;t related by blood. Fair point. I will die alone.</p>
+
+<p>I emerge from my room later in the afternoon to go to the bus depot again. The counter closes at 5 and if I get there around 4.15 I should be able to take any tickets that got canceled. Just like yesterday.
+Fun fact that I learned when I reached the bus station - the counters close early on weekends.</p>
+
+<p>So no ticket. I go back to Thimpu and have lots of ice cream.</p>
+
+<p>No point not enjoying myself even if I will have to go back from Thimpu.
+There is some cultural festival type thing going on in the town centre. Girls dancing on a stage with lots of people sitting on the steps enjoying the sun. A couple of companies have booths set up near by. I checked out the Suzuki motorcycles. One of them is 650cc which would be perfect for touring.</p>
+
+<p><em>Can I buy this here and drive it India?</em><br />
+They will have to check.
+<em>How much?</em><br />
+8 lakhs.
+Okay I will have to check its price in India to understand where I can not afford it by more.</p>
+
+<p>Before going to bed I set three alarms in my phone- 5 am, 5.15 and 5.30</p>
+
+<h3>Day 3 - The show gets on the road</h3>
+
+<p>Got a call from my dad to wake me up. Of course the alarms didn&rsquo;t go off again. But I am up, phew.
+Got to the bus depot at 5.50. The counters only started opening at 6.30. Made this video -</p>
+
+<p>Still no canceled tickets. I convince a driver of bus going to Tashigang to take me on on the engine hood. Ha.
+I also get my bags loaded on the top of the bus..
+10 mins later I realise my travel permit is in those bages at the top of the bus, under the tarpaulin. Will have to deal with that situation later. Right now I don&rsquo;t have a bus seat.
+I keep pestering the counter ladies. It pays off. At 7.05 somebody turns up to cancel a ticket to Bumthang. The ticket lady points him to me.</p>
+
+<blockquote>
+<p><em>Would I like to buy a ticket to Bumthang?<br />
+Let me think. Umm&hellip; Yea I think I would be okay with that.
+Okay seat number 8. Pay my sister, she will travel with you.</em></p>
+</blockquote>
+
+<p>Woohoo.. I have a bus ticket to Bumthang.. again.
+This trip won&rsquo;t be a waste.</p>
+
+<p>The bus journey was again mostly uneventful and for the second time not as tiring as a 14 hour bus journey on bad mountain roads sounds like. I would happily take it again.</p>
+
+<p>The lady next to me who I had bought my ticket from had a two month old baby who asked to be fed every hour. The proximity to an exposed breast was quite stressful. In my head - <em>&lsquo;straight ahead, look dead straight. A nursing breast is not sexy, beautiful maybe but try not to figure that one out right now!&rsquo;</em> I cuddled the baby&rsquo;s cheeks many times during the journey but there were questions in my head.</p>
+
+<p>The bus only made one scheduled 20 min stop. A few kms after pele-la everybody had either chicken, beef or a vegetable stew with rice. I went with the chicken option and chatted to the only other Indian on the bus. He was a student who was interning at an institute in Bumthang. He had also done his undergraduate studies at a university in Wangdue(pronounced wang-dee). Which meant he had spent the last three years in Bhutan. Lucky git.</p>
+
+<p>Just before the end of the journey, near the top of ___pass we had to make an unscheduled stop. A big flatback? truck carrying a heavy bulldozer on it had got stuck on a very tight turning. The rear tires were on the edge of the road which was crumbling under the weight. The truck and the bulldozer on top were tilted more than 20 degrees towards the cliff. The front was pressed against the mountain side  so any further movement would have tilted it more. Precarious - the word was invented for such situations.</p>
+
+<p><img src="./IMG_20161023_190430.jpg" alt="Best pic I could take of the truck and the bulldozer" /></p>
+
+<p>I started calculating how long it would take to get back to Thimpu from here although eighty percent of the journey was complete.
+It was pitch dark by now and a crowd had gathered with their mobile flash lights to help the couple of guys who were actually working on a solution. There were a couple of buses and a few cars stuck on both sides. Somebody climbed a few feet into the valley with a large jerry can and another person connected it to the truck&rsquo;s fuel tank with a hose pipe.
+The diesel collected in the jerry can was then emptied into the bulldozer. Everyone assumed they were going to drive the bulldozer off the truck before attempting to maneuver the truck around the turn. The guys went with a more brute force solution. The arm of the bulldozer was pushed into the ground behind it which in turn forced the truck and the bulldozer forward. Newton&rsquo;s third law &ndash; it is real!
+The truck jumped forward, the light bearers scattered and the high altitude traffic jam cleared. Under the light of the stars the convoy crossed the mountain pass and descended into Bumthang valley. Too flowery?.</p>
+
+<p>Another couple of hours later all of us made it safely to Jakar.
+I was at the hotel after 9. I failed to recognize the owner, he failed to recognize me. But after a few seconds both of us made it past that stage. They had a room.</p>
+
+<p>I uncovered the bike. The packaging had surprisingly survived even though I had done it very hurriedly and in the dark. The battery hadn&rsquo;t drained out either. But it didn&rsquo;t want to start. So I rolled it out of the hotel and left it on the other side of the road and went and had some dinner. Which was again chicken and rice. I had a look in &lsquo;Bumthang club&rsquo;. Young girls were dancing on the stage while less young guys were watching them with drinks in had. I had stumbled into a similar establishment in Paro. They are basically a strip club, without the stripping.
+On my way back to the hotel I gave the motorcycle another go. Cleaned the Spark plug and after a few kicks it came to life!
+Time for bed. I dozed off while looking up route info on my laptop and munching on some Raw Wai-Wai.</p>
+
+<h3>Day 4 - This is what I came for</h3>
+
+<p>I woke up around 7 but didn&rsquo;t hit the roads until 10. I had got the motorcycle up and running the previous night so I wasn&rsquo;t too worried. Also I was only planning to ride 160kms to Tashigang.
+I wanted to talk to the owner of the hotel for a little bit before I left. He had been very kind to me so I didn&rsquo;t want to just take my motorcycle and disappear. So after a late shower I sat down to have some tea with him. I had a few questions about Bhutanese drinking culture, he had a few about Hinduism and Sikhism. His wife mentioned I looked a lot younger without the beard. So now I looked only ten years older than I am.</p>
+
+<p>I had a minor scare when I saw the bike leaking petrol from the carburetor. But I think this was just because of parking the bike on a slope. I promised the bike a visit to the mechanic but it didn&rsquo;t protest when I drove it straight to Mongar instead. On the way I passed through Thomson-la. Which happens to be the highest pass in Bhutan. On the top I met a couple of monks who gave a piece of dry cheese. Soon after descending from the pass I came across the beautiful s___ valley. The roads were mostly in good shape with only a few rough patches. I averaged 30kph in most places but I did hit 60-70 in some places where the road had been double-laned.
+I stopped in a couple of places to have tea. One of these places I met a &lsquo;food inspector&rsquo;, who at the time was just having his food not inspecting it. We laughed quite hard on that one. The other place had the most well organised shop I have ever seen. They were using empty cartons for shelving and it looked very neat. The place also had a cute 4 month old German Shephard puppy.</p>
+
+<p>I reached Mongar just after 5 and it was getting dark. I topped up my bike with petrol and went to the hotel recommended by Mr. Kelzang, the owner of the hotel in Bumthang. Nu.850 for a very nice single room. No bargaining required.
+I cleaned up my face which at the time was looking like a mechanic&rsquo;s rag and went to have a look at the town. It looks very modern) and has all the hallmarks of a well organised tiny city. The buildings followed a similar architecture, similar to what is found in Thimpu. Cars are parked in marked parking bays in the town centre, there are a few zebra crossings and at least two traffic police.</p>
+
+<p>I went in search for momos but had to settle for some tea and a nice conversation with a Bhutanese gentleman who worked at the nearby hospital and also ran a restaurant. We compared fidelity of couples in India and Bhutan. He lamented the lack of stable relationships in Bhutan and I the forced pretense of love that often passes off as marriage in India.
+He refused payment for the cup of tea when I decided to leave.
+Beef momos were found and had in another eatery. The other patrons were a group of youngish looking people who were enjoying beer.
+Momos were actually quite good. I had regretted getting beef momos on a couple of occasions before but this time I asked for another plate to take to my hotel room.</p>
+
+<h3>Day 5 - Can I just stay here</h3>
+
+<p>Woke very late. Showered, tea-ed and was on the road by 11. I wasn&rsquo;t planning on riding very long. Tashigang was only 90kms away. I could also stop in Tashiyangtse which has a couple of dzongs. It was further north so not on the way to Samdrup Jhonkar.
+The road to tashigamg was in a lot worse condition than the road between Bumthang and Mongar. There is heavy construction work going on in many places. The light traffic that the road has was being held up by diggers clawing on the mountain wall and filling up waiting trucks with rocks and debris. The ride was a bit boring as the spectacular green valleys which are found everywhere in Bhutan were missing. Probably due to the construction work everything seemed coated with a coat of dust.
+Thirty kms before Tashigang upon crossing a bridge the road joins a river and then carries on alongside it. There was no more construction work after this. The road is wider here and mostly downhill so I let the speed demon in me lose for a while.
+I ran into the Royal Enfield Bhutan tour at a bridge 10 kms before Tashigang. This is where the road splits for tashiyangtse. They had it on their itenary but were skipping it because the road ahead was closed. Their group leader turned out to be the guy who I had spoken to in Thimpu. Finally it made some sense why he was less than friendly.
+I chatted to some people in the group and decided to head towards tashiyangtse. Though the road ahead was closed for most of the day, I learned that the traffic is allowed through at intervals as per a schedule. The next 15 min window was in 20 mins and it was 9 km away. I raced towards it and made it through.
+Just after the construction blockade the road widening work has been completed. The road starts ascending slowly and the views become very beautiful again. The mountain sides are under thick green cover with a lot of villages along the way. The road follows the valley north. No high passes to climb. Just bendy roads all the way. I took a wrong turn up a mountain but no regrets. This was one of those &lsquo;happy roads&rsquo; that I wish somebody had a database of somewhere.
+I made it to tashi-yangtse around 4.30 and checked into what is probably the only hotel in town. 700 for a double room. Without a geyser albeit. Nowhere near as nice as the one I had in Mongar but not too shabby either.
+It was too late to go to the dzong so I went to have a look in the town instead. As in lots of other places in Bhutan these are the things I found-
+Monks and other locals playing carrom. Usually sitting on top of an empty oil drum.
+Small eataries which mostly cater to the younger crowd and also serve alcohol.
+A big prayer wheel in the town centre.
+Evidence of traffic management - Zebra crossings, parking bays, traffic police.</p>
+
+<h3>Day 6 - The blues</h3>
+
+<p>didn&rsquo;t have much of a plan for the day. I knew I had some time so wasn&rsquo;t even sure if I was going anywhere from Tashi yangtse. The place is very charming and I wouldn&rsquo;t mind spending more time there.
+Tashi yangtse has two dzongs- the old one where only monks live now. And the new one where all the government offices are located. I went to the new one first. It is just 3 kms above the city. Standard dzong. A Courtyard in the middle and government offices all around. This one had the revenue office, land registry, census bureau, cultural officer, finance section and the Royal court of Bhutan on the first floor. I wasn&rsquo;t allowed photography I inside. A bit unusual because Dzongs are just government offices.
+I went to the &lsquo;chorten kora&rsquo;. It is a big white structure just below the village.</p>
+
+<p>I went back to the hotel to charge the camera batteries. I went out again to have a look at the place. The blues started setting in. As they do when you know when a good thing is about to come to an end. I had 2 days left in the trip and that was just not enough. It wasn&rsquo;t like I had a lot of places to visit. I just wanted to be there. Tashiyangtse was almost perfect. Less developed than Mongar. Wikipedia says it has 3000 inhabitants. I would have guessed less than 500. There are only a few shops about. A big school from where children were streaming out when I had reached the place.
+Batteries charged, I packed up and checked out of the hotel. I drove towards the old dzong. I had seen it on the way in. On the other side of the river, on a very high mountain cliff. 4 kms before ty there is a small road that splits off the main Highway and goes downwards to a bridge and then climbs up on the other side to the monastery.
+I am not sure how old the monastery is but the approach and the steps looked like they were newly constructed/renovated. The monastery has a near 360 degree views. There is a big Courtyard at the top of the steps. And then the main structure itself towards the back. Most monks didn&rsquo;t speak or understand Hindi/English. They called one of the senior ones who did and he assigned one of them to be my guide. He took me to the 2nd floor of the monastery where the main shrine was. No photography inside the shrine as usual.
+The monks go up and dowI am not sure how old the monastery is but the approach and the steps looked like they were newly constructed/renovated. The monastery has a near 360 degree views. There is a big Courtyard at the top of the steps. And then the main structure itself towards the back. Most monks didn&rsquo;t speak or understand Hindi/English. They called one of the senior ones who did and he assigned one of them to be my guide. He took me to the 2nd floor of the monastery where the main shrine was. No photography inside the shrine as usual.
+The monks go up and down the extremely steep staircases like nothing. For me they were a challenge. They were especially steep in this monastery with tiny steps. I took my time, climbing down while looking towards the steps and holding the railings. The monks followed me, face forwards, with a bucket in one had and in about 5 seconds.
+I had to stop in a small market village, the only one on the route, to wait out the roadwon the extremely steep staircases like nothing. For me they were a challenge. They were especially steep in this monastery with tiny steps. I took my time, climbing down while looking towards the steps and holding the railings. The monk followed me, face forwards, with a bucket in one had and in about 5 seconds.
+I had to stop in a small marle like me hket village, the only one on the route, to wait out the roadworks blockade. Had some of the orange tomatoes. Chatted to some locals and took a few pictures. It still had time so I went to another monastery on the way which I wasn&rsquo;t planning to visit otherwise. Glad that I did. A local told me it dates back to 8th century! And was very sacred to Bhutanese as well as people in Arunachal. Who cross over from Tawang via a shortcut nearby. Normal people have to travel 400 kms to get there.</p>
+
+<p>I got to Tashigang late and tried to look for a hotel. I had made a friend on the way who took me to a hotel I didn&rsquo;t like. Second option was a bit too pricey for me. Third option was interesting it is a bit out of town but a massive newly built resort. But I didn&rsquo;t know that when I left the main highway on an unmarked path with no lights. This route was unsurfaced and extremely steep. I had to be very careful to make sure the bike didn&rsquo;t slip and I didn&rsquo;t hurt myself.
+The hotel was definitely impressive. The prices were also unsurprisingly way more than I was prepared to pay. Normal rooms costed Nu.3000 but I negotiated it down to Nu.1200.</p>
+
+<p>I went back into town to find food and to get a shave. Here is the transformation &ndash;</p>
+
+<h3>Day 7 - Dragging my feet</h3>
+
+<p>Tashigang - Wamrong</p>
+
+<p>No logs found. This is from memory &ndash;
+At some point I had realised I wan&rsquo;t going to make it to guwahati on time. So I canceled my train ticket and booked a flight for 28 evening instead.</p>
+
+<p>This gave me extra two days to explore east Bhutan. Now I was in Tashiyangtse with not much on the agenda. I visited tashigang dzong in the morning and then drove around half way to the India-Bhutan Border at Samdrup Jhonkar.
+I made this video about the trip while in Wamrong.</p>
+
+<h3>Day 8 - Back where I started</h3>
+
+<p>Wamrong - Guwahati
+No logs found. This is from memory &ndash;
+I left extremely early- around 5.30 because I wanted to make it to Guwahati around 12.</p>
+
+<p>I crossed the border after 3 hours. I was a bit worried since I didn&rsquo;t have permits for the motorcycle but nobody bothered. I think I had put in the papers from last trip.</p>
+
+<p>The mountains ended at the border. The drive through Assam was a surprise. Extremely beautiful vistas, and not much traffic. I was told there were some riots etc in the area but I made it through without incident. I did see a group of guys stopping traffic at one point. So I stopped a bit far to assess the situation. Turned out they were just collecting chanda for a Mandir nearby.
+I reached Guwahati, had some food and met up with a friend I had travelled with a few years ago. I was planning to leave my bike here for another north-east trip later. But After a couple of hours the plan changed. I booked the bike to be sent to delhi by train. Ran out of time in the end as I had to leave the station without even seeing my bike packed up. The airport was 35 kms away and I was once again in danger of missing my flight. I made it in the end.</p>
+
+<h2>A few days later</h2>
+
+<p>I went to Anand Vihar station after a week because I knew there was a chance the bike would be put on some other train than the one I had booked. There were no signs of the bike and none of the babus had seen my bullet come through in the last few days. To make things interesting my dog had eaten half the receipt for the motorcycle so i had no way to track it. I spent a few hours at a tracking office near New Delhi station and then at the platforms itself looking for any trace of the bike in the registers.
+Went back home half expecting the bike to be gone.
+It turned up the next day :)</p>
+
+<h3>Itinerary</h3>
+
+<p>20/10/2016
+20 - <del>Fly to Paro</del>
+21 - Fly to Paro, get tickets, permits, etc
+22 - Thimpu
+23 - Thimpu to Bumthang (Jakar village)
+24 - Jakar to Mongar
+25 - Mongar to Tashiyangtse
+26 - Tashiyangtse to Tashigang
+27 - Tashigang to Wamrong
+28 - Wamrong to Guwahati via Samdrup Jhonkar, Flight to Delhi</p>
+
+<p>Expenses
+Around 12k for hotels, food, fuel
+Around 20k bike courier, flights</p>
+
+<p>[^1]: Half an hour ahead of IST</p>
+
+<p>[^2]: Bhutan&rsquo;s currency &lsquo;Ngultrum&rsquo; (pronounced &lsquo;zong&rsquo;) has its value linked to the Indian Rupee. So â‚¹1 = Nu.1</p>
+]]></description>
+        <link>https://nishil.in/posts/bhutan-trip-log-ii.html</link>
+        <guid>https://nishil.in/posts/bhutan-trip-log-ii.html</guid>
+        <pubDate>Thu, 20 Apr 2017 01:51:02 -0800</pubDate>
+      </item>
+    
+      <item>
+        <title><![CDATA[The Joys of Network Attached Storage]]></title>
+        <description><![CDATA[<h4>Background</h4>
+
+<p>Around 4-5 years ago I decided I needed a NAS. I didn&rsquo;t particularly have a need for it. But I like tinkering with stuff and had a movie collection going into several TBs so I thought it would be a good idea to be able to access them over the network. Usually a NAS is great for environments where lots of users want access to the same data, for example - a shared media library for a family. As I was living in a shared apartment in London at the time I was going to be the main(only) user of it. But the NAS would still allow me to stream things to different devices - Laptop, Tablet or TV without having to plug in HDMI cables so I could justify it somewhat. I got a good deal on a <a href="https://www.amazon.co.uk/dp/B005LRCASM">HP microserver</a>. I installed Windows Home Server[^n], Plex, uTorrent and a few other things on it to make it work as a NAS. And that is how it stayed for over four years.</p>
+
+<p>Recently one of the HDDs in the server failed and I had to replace it. I also took the opportunity to make some major changes to my NAS. I reformatted the drives to XFS and made the switch from WHS to <a href="http://www.openmediavault.org/">OpenMediaVault </a>- a Linux based OS for NAS boxes. This is something I had been meaning to do for a long time.</p>
+
+<p>Over the years I have learned a fair bit about the myriad of options there are for setting up a NAS. Depending upon your budget, needs and patience with technology one of these might also work for you. Here is a rough overview of what a NAS is and some popular hardware and software options for setting up a NAS. My reccomendations are at the end.</p>
+
+<h4>What exactly is a NAS?</h4>
+
+<p>A computer/box like thing that sits in a dark corner of your house and does one thing - stores your large collection of (legally obtained) movies, TV shows, backups and <del>porn</del> other junk.</p>
+
+<h4>Why might you want one?</h4>
+
+<p>A NAS doesn&rsquo;t just store your data it also allows you to access it from multiple devices. So you could be streaming Simpsons while your wife and kids are watching whatever those people watch on a tablet or their computers.
+If you already have a TB or two of Movies and TV shows on your laptop or an external drive you really do need a NAS. I suspect you won&rsquo;t need much convincing either.</p>
+
+<h4>Why might you not want one?</h4>
+
+<p>Netflix. In a word. If Netflix meets your Movies, TV streaming needs and you have other ways of keeping your photos and other important files safe then not much point in having a NAS. I have had a large collection of movies from the pre-Netflix days and even though I too went through my Netflix and chill phase I am now back to downloading stuff. Mostly because I can and also because Netflix doesn&rsquo;t have everything I want to watch.</p>
+
+<p>There are a ton of hardware and software options you can go with if you decide to get one. Here are a few I am familiar with -</p>
+
+<h4>Hardware Options</h4>
+
+<h5>Old cheapie computer</h5>
+
+<p>You don&rsquo;t need to go out and buy a new computer to taste the benefits of a NAS. You might have an old computer hanging around somewhere in the house. Your parents computer they don&rsquo;t use anymore or the one you used to use before switching to a laptop/tablet. Get it out of storage. Give it a good cleanup and make sure it still works. If it has a SATA port(anything after 2009 should have it) you are in business.</p>
+
+<p>Share the files you want to access from elsewhere and leave the computer running 24x7. And that is it, you&rsquo;ve got yourself a NAS.</p>
+
+<p>pros</p>
+
+<ul>
+<li>cheap startup cost</li>
+<li>cheap HDDs</li>
+<li>Easy to add more HDDs later</li>
+</ul>
+
+<p>cons</p>
+
+<ul>
+<li>probably doesn&rsquo;t look good</li>
+<li>takes more space than necessary</li>
+<li>not quiet or power efficient</li>
+</ul>
+
+<blockquote>
+<p>You can also opt for an old laptop which in places with undependable power supply like India makes a lot of sense. You can avoid having to get a UPS with a laptop and they are usually a lot more power efficient. However laptops also usually can only take one HDD[^n] . Laptop drives are also usually more expensive than the desktop drives.</p>
+</blockquote>
+
+<h5>Ready made NAS</h5>
+
+<p>If you&rsquo;ve got the money in the bank or don&rsquo;t mind owing a bit more to the credit card companies this option will work for you. Just search for a <a href="https://www.synology.com/en-uk">Synology</a> or <a href="https://www.qnap.com/en-in/">Qnap</a> NAS that fits your budget and storage requirements and hit the buy button.</p>
+
+<p>pros</p>
+
+<ul>
+<li>Dead easy to set up</li>
+<li>Small form factor</li>
+</ul>
+
+<p>cons</p>
+
+<ul>
+<li>Expensive</li>
+<li>Underspecced</li>
+</ul>
+
+<h5>Custom built system</h5>
+
+<p>If you have built computers in the past and have some serious data storage requirements you might be better off buying the parts and building a server yourself. A motherboard with a passively cooled CPU and a case with lots of drive bays will be things you need. But I am probably preaching to the choir right now so I will stop.</p>
+
+<p>Pros</p>
+
+<ul>
+<li>Extremely flexible</li>
+</ul>
+
+<p>Cons</p>
+
+<ul>
+<li>Usually more expensive than a brebuilt server</li>
+</ul>
+
+<h5>Microserver</h5>
+
+<p>Middle path between a ready-made NAS and a custom build. This is also the option I went with. These devices are marketed as general purpose servers(don&rsquo;t get scared by that word. Servers are just computers made for 24x7 service) and usually don&rsquo;t come with an OS.
+But as they are servers they are designed for 24x7 operation while being small and efficient. Those are exactly the things you want in a NAS too. And afterall a NAS is also kind of a server that kicks ass at serving files. As a tradeoff you need to spend some time installing a OS and setting it up the way you like.
+<img src="./proliant_microserver.jpg" alt="" />
+<a href="https://www.amazon.co.uk/dp/B005LRCASM">HP proliant microserver N40L</a></p>
+
+<p>It is small - looks more like a subwoofer than a PC .
+It is cheap - costed me Â£100 after Â£100 cash back :)
+It is very well made</p>
+
+<h4>Software options</h4>
+
+<p>Ready-made NAS boxes come with an OS pre-installed that is tweaked to function as a NAS. So when you get the device you can just plug it in and then browse to its ip address. You can then do the rest of the fairly simple setup from there.
+If you are reuising an old PC or setting up a new system to function as a NAS there are a number of OS options to chose from. My pick is &lsquo;OpenMediaVault&rsquo; for most home uses but I am going to list most of the popular ones anyway.</p>
+
+<h5>Ubuntu from scratch</h5>
+
+<p>Only fit for people with a little bit of Linux experience.
+Pros</p>
+
+<ul>
+<li>extremely flexible - make your server do anything - almost</li>
+<li>OSS</li>
+</ul>
+
+<p>Cons</p>
+
+<ul>
+<li>only for hardcore geeks</li>
+<li>No webui</li>
+<li>lot of work required for set up</li>
+</ul>
+
+<h5>FreeNAS</h5>
+
+<p>Pros</p>
+
+<ul>
+<li>OSS</li>
+<li>Eterprise grade</li>
+</ul>
+
+<p>Cons</p>
+
+<ul>
+<li>Cant start with filled hdds</li>
+<li>ZFS</li>
+<li>high resource requirements</li>
+<li>Adding HDDs later will be tricky</li>
+</ul>
+
+<h5>Unraid</h5>
+
+<p>Pros</p>
+
+<ul>
+<li>runs from USB by default</li>
+<li>good forums</li>
+</ul>
+
+<p>Cons</p>
+
+<ul>
+<li>not OSS</li>
+</ul>
+
+<h5>Nas4Free</h5>
+
+<p>Cons</p>
+
+<ul>
+<li>old/outdated</li>
+</ul>
+
+<h5>OMV</h5>
+
+<p>Pros</p>
+
+<ul>
+<li>easy</li>
+<li>any filesystem would do</li>
+</ul>
+
+<h5>WHS11</h5>
+
+<ul>
+<li>Windows</li>
+<li>Costs money for the OS and addition software</li>
+<li>higher than linux resource requirements</li>
+<li>Can&rsquo;t run from USB (all other options can)</li>
+<li>really nice looking software available to manage things</li>
+</ul>
+
+<p>other options : Synology OS,</p>
+
+<p>####Data protection
+HDDs fail. All of them at some point of time. But if you have more than 2-3 you are almost guarenteed a failure within a few years. Because.. thats how probability works.
+So to protect against data loss from HDD failure you need to make sure your NAS can somehow get the data back after a HDD failure.</p>
+
+<p>This is where software RAID comes in.</p>
+
+<p><strong>SoftwareRAID</strong></p>
+
+<p>Also called snapshot raid. You dedicate one HDD in your system to act as the insurance policy for the rest. Each night a piece of software will calculate &lsquo;parity&rsquo; information and store it in this drive(called the parity drive). If one of your main hard drives fail then the data on it can be recreated on a new HDD by using the parity info and data on the remaining drives.</p>
+
+<p>Options -
+Snapraid, flexraid, zfs, unRAID
+Snapraid is OSS and flexraid is not
+Flexraid has a UI, snapraid does not</p>
+
+<p><strong>Drive pooling</strong></p>
+
+<p>Having your data on more than two drives can get confusing. You don&rsquo;t want to look through your data on multiple drives before finding it. WOuldn&rsquo;t it be great if somehow you could merge all the drives together and have them behave as one.
+Options&ndash;
+on windows - drivepool- does the job perfectly. Not OSS but worth every penny/paisa
+other OSs - Aufs, greyhole etc. MergerFS - almost the same as drivepool but not as polished. zfs</p>
+
+<p>####Filesystems
+on windows - NTFS
+other OSs - EXT4, XFS, ZFS, Btrfs, Rieserfs</p>
+
+<p>EXT4 and XFS are standard linux filesystems
+ZFS is NAS focused with bult in snapshots and pooling
+Btrfs, Riserfs - more experimental. If you want them you must also know why.</p>
+
+<h4>Reccomendations</h4>
+
+<p>Here are my reccomendations for the option to pick for different kinds of users.</p>
+
+<h5>High Budget, Low technical skill</h5>
+
+<p>Get a readymade NAS device. Duh.</p>
+
+<h5>Low Budget, Medium technical skill</h5>
+
+<p>Hardware - Old computer
+Software - Unraid or OMV</p>
+
+<h5>High Budget, Medium technical skill, more than  10 TB storage required</h5>
+
+<p>Hardware - Custom build
+Software - WHS + DrivePool+ Snapraid</p>
+
+<h5>Medium budget, Medium technical skill, less than 10TB storage required</h5>
+
+<p>Hardware - Microserver
+Software - WHS + Drivepool + Snapraid
+or
+Software - OMV + Snapraid + MergerFS</p>
+
+<h5>High Budget, High technical skill, more than 10TB storage required</h5>
+
+<p>Hardware - custom build
+Software - FreeNAS + ZFS</p>
+
+<p>resources : reddit/datahoarder, reddit/homeserver</p>
+
+<p>[^1]: Very much like normal windows but with some added server jazz
+[^2]: Two if you replace the CD drive with a HDD too and a few more over USB</p>
+]]></description>
+        <link>https://nishil.in/posts/the-joys-of-network-attached-storage.html</link>
+        <guid>https://nishil.in/posts/the-joys-of-network-attached-storage.html</guid>
+        <pubDate>Sun, 16 Apr 2017 02:37:09 -0800</pubDate>
+      </item>
+    
+      <item>
+        <title><![CDATA[How to configure nginx with HTTPS redirects and geoip]]></title>
+        <description><![CDATA[<p>This is mostly for self reference but might help somebody out there.</p>
+
+<h3>Background</h3>
+
+<p>I run a couple of sites on <a href="https://www.digitalocean.com/">Digital Ocean</a> and thought it would be a good idea to have them use HTTPS as it is 2017 and google is <a href="https://motherboard.vice.com/en_us/article/google-will-soon-shame-all-websites-that-are-unencrypted-chrome-https">pushing</a> for a HTTPS-only web in the future.</p>
+
+<p>My sites are standard node+express and emberjs apps. Running inside their Docker containers with nginx webserver on the front. I wanted to achieve the following -</p>
+
+<ol>
+<li>www requests to be rediected to non-www site.</li>
+<li>HTTP requests to be redirected to HTTPS</li>
+<li>Geo-ip info to be passed to the apps with all requests</li>
+<li>Handle all of the above for two separate sites I am hosting on the same server.</li>
+</ol>
+
+<p>The first requirement redirects people typing <code>www.mysite.com</code> to <code>mysite.com</code>. This is preferabe because google treats www and non-www as two separate domains.
+The second requirement forces all connections to use HTTPS. Because what Is the point of having HTTPS configured if you aren&rsquo;t going to enforce it?
+I am using geoip info in some of my apps and don&rsquo;t want to depend on external APIs or run a separate local instance to do the lookups. Much easier to just have the database sitting locally and webserver getting the info even before the request reaches the app.</p>
+
+<h3>How-to</h3>
+
+<h4>Prerequisites</h4>
+
+<ol>
+<li>The following config assumes you have your apps running inside their docker containers which either share the docker network with a container running nginx or nginx is running on the host system and is able to communicate to the apps through <a href="https://docs.docker.com/engine/reference/builder/#expose">exposed ports</a>.</li>
+</ol>
+
+<ul>
+<li>You need to have your SSL certificates in place before running nginx or it will crash. The SSL certificates need to be valid for both www and non-www domains otherwise redirects will throw up errors. <a href="https://letsencrypt.org/">Letsencrypt</a> is a good place to start when looking for certificates.</li>
+<li>Make sure your instalation of nginx has the geoip module by running <code>nginx -V</code> and looking for <code>--with-http_geoip_module</code></li>
+<li>Download and save Maxmind&rsquo;s city and country <a href="http://dev.maxmind.com/geoip/geoip2/geolite2/">Geo-ip databases</a>.</li>
+</ul>
+
+<h4>nginx.conf</h4>
+
+<p>After going through DO&rsquo;s tutorial and a few threads on Stack-overflow this is what I ended up with in my nginx.conf. Look for comments which explain things further  &ndash;</p>
+
+<pre><code class="language-nginx">user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+# Required for Geo-ip to work
+load_module &quot;modules/ngx_http_geoip_module.so&quot;;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+
+    # maxmind's country and city IP database
+    geoip_country /etc/nginx/geoip/GeoIP.dat; 
+    geoip_city /etc/nginx/geoip/GeoLiteCity.dat;
+
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+                      '$status $body_bytes_sent &quot;$http_referer&quot; '
+                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+    access_log  /dev/stdout  main;
+    sendfile        on;
+    keepalive_timeout  65;
+	
+    # Listen for non-HTTPS requests and redirect them to HTTPS
+    server {
+        server_name www.site1.com site1.com;
+        return 301 https://site1.com$request_uri;
+    }
+
+    # Listen for www requests with HTTPS and redirect them to non www site 
+    server {
+        listen              443 ssl;
+        server_name         www.site1.com;
+        # path to SSL certificates
+        ssl_certificate     /etc/letsencrypt/live/www.site1.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/www.site1.com/privkey.pem;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+        return 301 https://site1.com$request_uri;
+    }
+    
+    # Listen for non-www HTTPS requests and serve the app
+    server {
+        listen              443 ssl;
+        server_name         site1.com;
+        # path to SSL certificates
+        ssl_certificate     /etc/letsencrypt/live/www.site1.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/www.site1.com/privkey.pem;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        location ^~ /.well-known/ {
+            root   /usr/share/nginx/html;
+            allow all;
+        }
+
+        location / {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            # Set geo-ip headers
+            proxy_set_header geoip_country_code $geoip_country_code;
+            proxy_set_header geoip_city $geoip_city;
+            proxy_set_header geoip_latitude $geoip_latitude;
+            proxy_set_header geoip_longitude $geoip_longitude;
+            proxy_pass http://app1:3000;    # replace 'app1' with 'localhost' if ngix is not running within docker network 
+        }
+    }
+    
+    # Listen for non-HTTPS requests and redirect them to HTTPS
+    server {
+        server_name www.site2.com site2.com;
+        return 301 https://site2.com$request_uri;
+    }
+
+    # Listen for www requests with HTTPS and redirect them to non www site
+    server {
+        listen              443 ssl;
+        server_name         www.site2.com;
+        ssl_certificate     /etc/letsencrypt/live/www.site2.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/www.site2.com/privkey.pem;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+        return 301 https://site2.com$request_uri;
+    }
+
+    # Listen for non-www HTTPS requests and serve the app
+    server {
+        listen              443 ssl;
+        server_name         site2.com;
+        ssl_certificate     /etc/letsencrypt/live/www.site2.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/www.site2.com/privkey.pem;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+
+        location ^~ /.well-known/ {
+            root   /usr/share/nginx/html;
+            allow all;
+        }
+
+        location / {
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            # Set geo-ip headers
+            proxy_set_header geoip_country_code $geoip_country_code;
+            proxy_set_header geoip_city $geoip_city;
+            proxy_set_header geoip_latitude $geoip_latitude;
+            proxy_set_header geoip_longitude $geoip_longitude;
+            proxy_pass http://app2:4200;  # replace 'app2' with 'localhost' if ngix is not running within docker network   
+        }
+    }
+}
+</code></pre>
+]]></description>
+        <link>https://nishil.in/posts/how-to-configure-nginx-with-https-redirects-and-geoip.html</link>
+        <guid>https://nishil.in/posts/how-to-configure-nginx-with-https-redirects-and-geoip.html</guid>
+        <pubDate>Fri, 10 Mar 2017 19:21:00 -0800</pubDate>
+      </item>
+    
+      <item>
+        <title><![CDATA[Redundant internet using a Tomato capable router]]></title>
+        <description><![CDATA[<p><img src="./tomato-1.jpg" alt="" /></p>
+
+<p>TLDR; Get a tomato-capable router. Use its multi-WAN function to fuse connections from two ISPs together</p>
+
+<h3>Rant</h3>
+
+<p>Internet situation in India is bad. I am currently living in New Delhi but was based in UK for the last 5 years. I had got used to 50mbps and even 100mbps unlimited connections. After moving back I was a bit surprised to learn things hadn&rsquo;t moved on much at all since I left. Only a couple of ISPs (Airtel and MTNL) in Delhi were capable of providing stable connections. Fast, unlimited plans were nowhere to be found. I was frequently paying more than Rs4,000 per month for internet, due to all the additional data I was using. This was on Airtel&rsquo;s 8mbps plan which came with a 80GB &lsquo;FUP&rsquo;[^1]. I was paying far less for completely unlimited 50mbps/100mbps plans back in UK!</p>
+
+<p>So I bit the bullet and got a connection from a local ISP called &lsquo;Excitel&rsquo;. I had never heard of them and was dubious about their ability to provide a reliable connection. But their 50mbps <strong>unlimited</strong> connection at Rs 800 per month was enticing enough. Four guys turned up to do the installation. The internet came over a LAN cable flung from the nearest khamba[^5]. I had last got internet this way more than 10 years ago[^2]. As expected the connection was very unreliable. I was raising several support tickets each week to get the connectivity restored each time it went down.
+I had wisely not disconnected Airtel yet. So whenever Excitel went down I could switch wifi connections and start using Airtel for a few hours. So I now had unlimited internet for about Rs1800 per month for the two connections(after switching to Airtel&rsquo;s lowest 10GB plan). But the manual switching of wifi connections was getting annoying.</p>
+
+<p>After a few months of putting up with this I finally put a solution in place. I have been running  <a href="https://advancedtomato.com/">Tomato firmware</a>[^3] on my router since many years. And recently the developers added multi-WAN functionality to the firmware. Perfect. I updated the router and made the required configuration changes and lived happily ever after.</p>
+
+<h3>How-To</h3>
+
+<p>Here are the steps to follow if you find yourself in a similar situation -</p>
+
+<ol>
+<li>Get a router that supports <a href="https://advancedtomato.com/">Tomato firmware</a> (anything that has a broadcom chip inside). Get one of <a href="https://advancedtomato.com/downloads">these</a> if you are unsure. I am using a Netgear WNR3500L v2[^4].</li>
+</ol>
+
+<ul>
+<li>Download tomato  for your router from <a href="https://advancedtomato.com/downloads">here</a> if you want the new slick UI or from <a href="http://tomato.groov.pl/?page_id=164">here</a> if you like the old school look.</li>
+<li>Open your router settings page. Usually at <code>192.168.1.1</code> or <code>192.168.0.1</code>.</li>
+<li>Find the option to upgrade firmware and upload the tomato firmware file.</li>
+<li>Wait for the firmware to be installed and pray your router doesn’t get bricked.</li>
+<li>Once the new firmware is installed go to <code>192.168.1.1</code> and navigate to <code>Advanced &gt; VLAN</code> on the sidebar</li>
+<li>Uncheck port 1 for <code>LAN(br0)</code></li>
+<li>On the last row select &lsquo;WAN2&rsquo; from the drop-down and select port 1. Click Add. This will designate Port 1 to be used as your second WAN port. Your screen should be looking like the screenshot below now. <img src="./Screenshot_1.png" alt="" /></li>
+<li>Click save and navigate to <code>Basic &gt; Network</code></li>
+<li>Select &lsquo;2WAN&rsquo; for number of WAN ports option.</li>
+<li>Configure WAN 1 details as provided by your ISP. Connection type would probably be DHCP or pppoe with a user name and password.</li>
+<li>For WAN 2 set the connection type to DHCP and load balance weight to 0.</li>
+<li>Configure your wifi name and password on the same page. Click save and wait for the router to reboot. <img src="./Screenshot_3.png" alt="" /></li>
+<li>Connect an ethernet cable from one of the LAN ports on your Airtel/MTNL modem to port 1 on the tomato router.</li>
+<li>Done</li>
+</ul>
+
+<p>You should now have an always up connection which automatically falls back to using your 2nd ISP when the first one goes down.</p>
+
+<h3>Notes</h3>
+
+<ul>
+<li>You can also use another open-source firmware - <a href="http://www.dd-wrt.com/">dd-wrt</a> to achieve similar results. If you already have a router <a href="https://dd-wrt.com/wiki/index.php/Supported_Devices">compatible</a> with dd-wrt you should give it a shot first. I don&rsquo;t have any experience with it so please get <a href="https://www.google.co.in/search?q=ddwrt+multiwan">google</a> to help you with this.</li>
+<li>When the router is using ISP2 with the above setup you are accessing the internet via two devices. This will cause a &lsquo;double-NAT&rsquo; situation, which can cause problems for services such as torrents and VOIP. An easy fix would be to put the IP address of the tomato router in &lsquo;DMZ&rsquo; on the modem/router for ISP2.</li>
+<li>It is possible to have the router send push alerts to your phone every time one of the connections goes down. I will write a separate post on how to set this up.</li>
+<li>Airtel has upped its smallest plan&rsquo;s data from 10 to 25 GB now so I am less concerned about going over in the periods Excitel is down. However it would still be a good idea to keep track of usage on the backup connection.</li>
+</ul>
+
+<p>[^1]: ISPs in India really need to stop abusing the term &lsquo;Fair Usage Policy&rsquo;
+[^2]: Anyone remember Sify Broadband?
+[^3]: Tomato is an opensource firmware that can supercharge your router.
+[^4]: Fun fact, I purchased four of these for &amp;pound;1 each a few years ago :)
+[^5]: Utility pole</p>
+]]></description>
+        <link>https://nishil.in/posts/redundant-internet-using-a-tomato-capable-router.html</link>
+        <guid>https://nishil.in/posts/redundant-internet-using-a-tomato-capable-router.html</guid>
+        <pubDate>Thu, 09 Mar 2017 21:54:06 -0800</pubDate>
+      </item>
+    
+  </channel>
+</rss>
