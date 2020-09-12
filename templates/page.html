@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ .Title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hoffa/steel.css/steel.css">
+  </head>
+  <body>
+    {{ if eq .Path "index.html" }}
+      <h1>Nishil Kohli</h1>
+      <p>Hey, I'm <a href="/about.html">Nishil</a>! I write here sometimes. Subscribe via <a href="/feed.xml">RSS</a>.</p>
+      <ul>
+        {{ range .Pages }}
+          <li>
+            <a href="{{ .URL }}">{{ .Title }}</a> &mdash;
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+      <p>
+        <a href="/">Home</a>
+      </p>
+    {{ end }}
+  </body>
+</html>
