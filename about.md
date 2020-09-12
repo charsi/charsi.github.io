@@ -10,7 +10,7 @@ I have a backgound in large scale 3D simulations and VR. Previously based in Lon
 Some examples of my work are available [here](/projects).
 
 You can reach me at <hello@nishil.in>.
-I'm also on [GitHub](https://github.com/hoffa) and [Mastodon](https://mastodon.social/@charsi).
+I'm also on [GitHub](https://github.com/charsi) and [Mastodon](https://mastodon.social/@charsi).
 
 This website runs on [GitHub Pages](https://pages.github.com).
 Pages are generated from Markdown using [`pt`](https://github.com/hoffa/pt).
