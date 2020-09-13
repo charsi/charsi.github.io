@@ -17,7 +17,7 @@ This is an attempt to document all the apps I have to install on a new android p
 - __Passwords__ - [KeePassDX](https://f-droid.org/en/packages/com.kunzisoft.keepass.libre/) for passwords and [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for OTPs. Both use a file in syncthing as the store. 
 - __Email__ - [K-9 Mail](https://f-droid.org/en/packages/com.fsck.k9/)
 - __Messengers__
-  - Signal - Not on Fdroid. Get APK direct from [signal.org](https://signal.org/android/apk/)
+  - Signal - Not on Fdroid. Get apk direct from [signal.org](https://signal.org/android/apk/)
   - [Jami](https://jami.net/) - Also includes sip calling functionality using general voip accounts like [callcentric](https://www.callcentric.com/).
 - __Notes/Tasks__ - [Orgzly](https://f-droid.org/en/packages/com.orgzly/)
 - __Media__
