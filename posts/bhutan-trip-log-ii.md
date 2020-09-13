@@ -133,9 +133,9 @@ Before going to bed I set three alarms in my phone- 5 am, 5.15 and 5.30
 Got a call from my dad to wake me up. Of course the alarms didn't go off again. But I am up, phew.
 Got to the bus depot at 5.50. The counters only started opening at 6.30. Made this video - 
 
-Still no canceled tickets. I convince a driver of bus going to Tashigang to take me on on the engine hood. Ha.
+Still no canceled tickets. I convinced a driver of bus going to Tashigang to allow me to travel on the engine hood of the bus.
 I also get my bags loaded on the top of the bus..
-10 mins later I realise my travel permit is in those bages at the top of the bus, under the tarpaulin. Will have to deal with that situation later. Right now I don't have a bus seat. 
+10 mins later I realise my travel permit is in those bags at the top of the bus, under the tarpaulin. Will have to deal with that situation later. Right now I don't have a bus seat. 
 I keep pestering the counter ladies. It pays off. At 7.05 somebody turns up to cancel a ticket to Bumthang. The ticket lady points him to me.
  
 >*Would I like to buy a ticket to Bumthang?  
