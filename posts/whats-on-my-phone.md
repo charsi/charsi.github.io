@@ -18,7 +18,7 @@ This is an attempt to document all the apps I have to install on a new android p
 - __Email__ - [K-9 Mail](https://f-droid.org/en/packages/com.fsck.k9/)
 - __Messengers__
   - Signal - Not on Fdroid. Get APK direct from [signal.org](https://signal.org/android/apk/)
-  - [Jitsi](https://f-droid.org/en/packages/cx.ring/) - Also includes sip calling functionality using general voip accounts like [callcentric](https://www.callcentric.com/).
+  - [Jami](https://f-droid.org/en/packages/cx.ring/) - Also includes sip calling functionality using general voip accounts like [callcentric](https://www.callcentric.com/).
 - __Notes/Tasks__ - [Orgzly](https://f-droid.org/en/packages/com.orgzly/)
 - __Media__
   - [NewPipe](https://newpipe.schabi.org/) - youtube client

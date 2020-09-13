@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 12 Sep 2020 21:14:43 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2020 23:08:34 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -31,7 +31,7 @@
 
 <ul>
 <li>Signal - Not on Fdroid. Get APK direct from <a href="https://signal.org/android/apk/">signal.org</a></li>
-<li><a href="https://f-droid.org/en/packages/cx.ring/">Jitsi</a> - Also includes sip calling functionality using general voip accounts like <a href="https://www.callcentric.com/">callcentric</a>.</li>
+<li><a href="https://f-droid.org/en/packages/cx.ring/">Jami</a> - Also includes sip calling functionality using general voip accounts like <a href="https://www.callcentric.com/">callcentric</a>.</li>
 </ul></li>
 <li><strong>Notes/Tasks</strong> - <a href="https://f-droid.org/en/packages/com.orgzly/">Orgzly</a></li>
 <li><strong>Media</strong>
