@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 12 Sep 2020 21:12:37 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2020 21:14:43 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -24,7 +24,7 @@
 <li><strong>App store</strong> Download the apk for the <a href="https://f-droid.org/">F-Droid</a> application store. This only offers FOSS applications. But covers about 90% of everything that I need on my phone.</li>
 <li><strong>Web browser</strong> - Firefox. Not available directly from fdroid. Install <a href="https://f-droid.org/en/packages/de.marmaro.krt.ffupdater/">FFUpdater</a> first. This pulls latest firefox builds from Mozilla&rsquo;s repos.</li>
 <li><strong>File syncing</strong> - <a href="https://syncthing.net/">Syncthing</a> - Dropbox replacement. I use it to sync everything to my new phone - Contacts, notes, passwords, TOTP seeds, youtube, podcast and RSS subsctiptions. Add <a href="https://cryptomator.org/">Cryptomator</a> on top if feeling paranoid</li>
-<li><strong>Contacts</strong> - <a href="https://f-droid.org/en/packages/org.decsync.cc/">DecSync CC</a> uses a file saved in my syncthing directory to store and sync contacts. Completley transparent to the phone&rsquo;s contacts app. I see my contacts there as usual. Just need to choose DecSync as the default location to savenew contacts.</li>
+<li><strong>Contacts</strong> - <a href="https://f-droid.org/en/packages/org.decsync.cc/">DecSync CC</a> uses a file saved in my syncthing directory to store and sync contacts. Completley transparent to the phone&rsquo;s contacts app. I see my contacts there as usual. Just need to choose DecSync as the default location to save new contacts.</li>
 <li><strong>Passwords</strong> - <a href="https://f-droid.org/en/packages/com.kunzisoft.keepass.libre/">KeePassDX</a> for passwords and <a href="https://f-droid.org/en/packages/org.shadowice.flocke.andotp/">andOTP</a> for OTPs. Both use a file in syncthing as the store.</li>
 <li><strong>Email</strong> - <a href="https://f-droid.org/en/packages/com.fsck.k9/">K-9 Mail</a></li>
 <li><strong>Messengers</strong>
