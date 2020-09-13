@@ -7,7 +7,9 @@ category: Technology
 
 This is an attempt to document all the apps I have to install on a new android phone to get it up and running. This is currently from memory. I'll update this post when I have to go though the steps for real next time.
 
-1. Go through all the steps of new phone wizard. Skip google account creation and opt out of all possible data collection *features* from google.
+1. Go through all the steps of new phone wizard. Skip google account creation and opt out of all possible data collection *features* from google. 
+ - Never sign into the phone with a google account.
+ - Disable the play store (can't login anyway) and play services.
 - Download the apk for the [F-Droid](https://f-droid.org/) application store and install it
 - Web browser - Firefox. Not available directly from fdroid. Install [FFUpdater](https://f-droid.org/en/packages/de.marmaro.krt.ffupdater/) first. This pulls latest firefox builds from Mozilla's repos. 
 - File syncing - [Syncthing](https://syncthing.net/) - I think of it as a dropbox replacement. I use it to sync everything to my new phone - Contacts, notes, passwords, TOTP seeds, youtube, podcast and RSS subsctiptions. Add [Cryptomator](https://cryptomator.org/) if feeling paranoid
