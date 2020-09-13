@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 13 Sep 2020 11:39:24 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2020 16:34:03 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -43,7 +43,7 @@
 <li><a href="https://f-droid.org/en/packages/org.y20k.transistor/">Transistor</a> - Online radio player. I use it to listed to BBC radio.</li>
 <li><a href="https://f-droid.org/en/packages/org.videolan.vlc/">VLC</a> - Video player</li>
 </ul></li>
-<li><strong>Navigation</strong> <a href="https://f-droid.org/en/packages/com.fsck.k9/">Sygic</a> - Closed source so not available from F-Droid. Get it from <a href="https://apkpure.com/sygic-gps-navigation-offline-maps/com.sygic.aura">APK mirror</a></li>
+<li><strong>Navigation</strong> <a href="https://f-droid.org/en/packages/com.fsck.k9/">Sygic</a> - Closed source so not available from F-Droid. Get it from <a href="https://apkpure.com/sygic-gps-navigation-offline-maps/com.sygic.aura">apkpure</a></li>
 <li><a href="https://f-droid.org/en/packages/me.ccrama.redditslide/">Slide</a> - Unofficial Reddit client</li>
 </ul>
 ]]></description>
