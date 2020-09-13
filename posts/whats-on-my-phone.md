@@ -10,7 +10,7 @@ This is an attempt to document all the apps I have to install on a new android p
 1. Go through all the steps of new phone wizard. Skip google account creation and opt out of all possible data collection *features* from google. 
  - Never sign into the phone with a google account.
  - Disable the play store (can't login anyway) and play services.
-- Download the apk for the [F-Droid](https://f-droid.org/) application store and install it
+- __App store__ Download the apk for the [F-Droid](https://f-droid.org/) application store. This only offers FOSS applications. But covers about 90% of everything that I need on my phone.
 - __Web browser__ - Firefox. Not available directly from fdroid. Install [FFUpdater](https://f-droid.org/en/packages/de.marmaro.krt.ffupdater/) first. This pulls latest firefox builds from Mozilla's repos. 
 - __File syncing__ - [Syncthing](https://syncthing.net/) - Dropbox replacement. I use it to sync everything to my new phone - Contacts, notes, passwords, TOTP seeds, youtube, podcast and RSS subsctiptions. Add [Cryptomator](https://cryptomator.org/) on top if feeling paranoid
 - __Contacts__ - [DecSync CC](https://f-droid.org/en/packages/org.decsync.cc/) uses a file saved in my syncthing directory to store and sync contacts. Completley transparent to the phone's contacts app. I see my contacts there as usual. Just need to choose DecSync as the default location to savenew contacts.
