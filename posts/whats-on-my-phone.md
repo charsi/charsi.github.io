@@ -14,7 +14,7 @@ This is an attempt to document all the apps I have to install on a new android p
 - __Web browser__ - Firefox. Not available directly from fdroid. Install [FFUpdater](https://f-droid.org/en/packages/de.marmaro.krt.ffupdater/) first. This pulls latest firefox builds from Mozilla's repos. 
 - __File syncing__ - [Syncthing](https://syncthing.net/) - Dropbox replacement. I use it to sync everything to my new phone - Contacts, notes, passwords, TOTP seeds, youtube, podcast and RSS subsctiptions. Add [Cryptomator](https://cryptomator.org/) on top if feeling paranoid
 - __Contacts__ - [DecSync CC](https://f-droid.org/en/packages/org.decsync.cc/) uses a file saved in my syncthing directory to store and sync contacts. Completley transparent to the phone's contacts app. I see my contacts there as usual. Just need to choose DecSync as the default location to savenew contacts.
-- **Passwords** - [KeePassDX](https://f-droid.org/en/packages/com.kunzisoft.keepass.libre/) for passwords and [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for OTPs. Both use a file in syncthing as the store. 
+- __Passwords__ - [KeePassDX](https://f-droid.org/en/packages/com.kunzisoft.keepass.libre/) for passwords and [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for OTPs. Both use a file in syncthing as the store. 
 - __Email__ - [K-9 Mail](https://f-droid.org/en/packages/com.fsck.k9/)
 - __Messengers__
   - Signal - Not on Fdroid. Get APK direct from [signal.org](https://signal.org/android/apk/)
