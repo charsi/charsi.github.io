@@ -24,7 +24,7 @@ This is an attempt to document all the apps I have to install on a new android p
   - [NewPipe](https://newpipe.schabi.org/) - youtube client
   - [Kore](https://f-droid.org/en/packages/org.xbmc.kore/) - remote for [kodi](https://kodi.tv/), previously called XBMC. Can also take video links from NewPipe and stream them to the TV. Who needs chromecast?
   - [Escapepod](https://f-droid.org/en/packages/org.y20k.escapepod/) - RSS based podcast subscription manager and player.
-  - [Transistor](https://f-droid.org/en/packages/org.y20k.transistor/) - Online radio player. I use it to listed to BC radio.
+  - [Transistor](https://f-droid.org/en/packages/org.y20k.transistor/) - Online radio player. I use it to listed to BBC radio.
   - [VLC](https://f-droid.org/en/packages/org.videolan.vlc/) - Video player
 - __Navigation__ [Sygic](https://f-droid.org/en/packages/com.fsck.k9/) - Closed source so not available from F-Droid. Get it from [APK mirror](https://apkpure.com/sygic-gps-navigation-offline-maps/com.sygic.aura) 
 - [Slide](https://f-droid.org/en/packages/me.ccrama.redditslide/) - Unofficial Reddit client
