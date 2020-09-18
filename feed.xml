@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 13 Sep 2020 16:34:03 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 18 Sep 2020 16:27:47 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -40,7 +40,7 @@
 <li><a href="https://newpipe.schabi.org/">NewPipe</a> - youtube client</li>
 <li><a href="https://f-droid.org/en/packages/org.xbmc.kore/">Kore</a> - remote for <a href="https://kodi.tv/">kodi</a>, previously called XBMC. Can also take video links from NewPipe and stream them to the TV. Who needs chromecast?</li>
 <li><a href="https://f-droid.org/en/packages/org.y20k.escapepod/">Escapepod</a> - RSS based podcast subscription manager and player.</li>
-<li><a href="https://f-droid.org/en/packages/org.y20k.transistor/">Transistor</a> - Online radio player. I use it to listed to BBC radio.</li>
+<li><a href="https://f-droid.org/en/packages/org.y20k.transistor/">Transistor</a> - Online radio player. I use it to listen to BBC radio.</li>
 <li><a href="https://f-droid.org/en/packages/org.videolan.vlc/">VLC</a> - Video player</li>
 </ul></li>
 <li><strong>Navigation</strong> <a href="https://f-droid.org/en/packages/com.fsck.k9/">Sygic</a> - Closed source so not available from F-Droid. Get it from <a href="https://apkpure.com/sygic-gps-navigation-offline-maps/com.sygic.aura">apkpure</a></li>
