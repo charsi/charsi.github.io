@@ -10,7 +10,7 @@ tags:
 category: Other Stuff
 ---
 
-![Hindi-Urdu Scripts](/images/hindi-urdu.png)
+<img class="header" src="/images/hindi-urdu.png" alt="Hindi-Urdu Scripts header img" />
 
 ### Learning Urdu
 A few years ago I tried to learn to read Urdu. Since it is basically the same language as Hindi with a different script, I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.
