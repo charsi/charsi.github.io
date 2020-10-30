@@ -5,6 +5,7 @@ Improvements
 DONE Add header image of two scripts URDU/HINDI 
 DONEAdd night mode to nishil.in css
 - make dark mode switchable
+- fix colour schemes for the code blocks and littlefoot.js
 DONE Fix image layout
 - fix image layout on phone
 DONE Add a git repo which can work with external issue trackers (gitlab/github etc)
