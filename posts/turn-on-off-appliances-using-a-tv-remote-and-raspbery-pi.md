@@ -6,7 +6,7 @@ tags:
 - raspberry pi
 category: Technology
 ---
-Get a relay  like [this one](http://www.dx.com/p/arduino-2-channel-relay-shield-module-red-144140). I got a two channel one because I wanted to control two separate devices - the TV and some active speakers. Get a single channel one if you just want to to turn on/off one device. Insert the relay into an [extension](http://www.amazon.in/Philips-Surge-Spike-Guard-Metres/dp/B00TIJXCLI). I had to block off one socket to make room. Carefully rewire the sockets so they go via the relays. Make sure you connect mains across the normally open points on the relay.
+Get a relay  like [this one](https://www.ebay.ca/itm/363050803595). I got a two channel one because I wanted to control two separate devices - the TV and some active speakers. Get a single channel one if you just want to to turn on/off one device. Insert the relay into an [extension](http://www.amazon.in/Philips-Surge-Spike-Guard-Metres/dp/B00TIJXCLI). I had to block off one socket to make room. Carefully rewire the sockets so they go via the relays. Make sure you connect mains across the normally open points on the relay.
 
 
 With the mains power isolated within the extension board I made a small opening and routed jumper cables out of the extension. The cables were connected to the pins on the relay and the other ends I connected these to the Raspberry pi's +5v, GND and GPIO 4, 17.
