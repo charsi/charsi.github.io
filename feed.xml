@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 18 Sep 2020 16:27:47 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2020 18:18:30 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -130,7 +130,9 @@ This is my function that forwards SMS-</p>
     
       <item>
         <title><![CDATA[My experiments with Urdu]]></title>
-        <description><![CDATA[<h3>Learning Urdu</h3>
+        <description><![CDATA[<p><img src="/images/hindi-urdu.png" alt="Hindi-Urdu Scripts" /></p>
+
+<h3>Learning Urdu</h3>
 
 <p>A few years ago I tried to learn to read Urdu. Since it is basically the same language as Hindi with a different script, I figured it won&rsquo;t be too hard. I was living with a few Pakistani friends at the time but they didn&rsquo;t prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.</p>
 
