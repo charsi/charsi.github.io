@@ -1,19 +1,24 @@
 
+
 Improvements
 ============
-- Add header image of two scripts URDU/HINDI
-- Add night mode to nishil.in css
-- Fix image layout
-- Add a git repo which can work with external issue trackers (gitlab/github etc)
+DONE Add header image of two scripts URDU/HINDI 
+DONEAdd night mode to nishil.in css
+- make dark mode switchable
+DONE Fix image layout
+- fix image layout on phone
+DONE Add a git repo which can work with external issue trackers (gitlab/github etc)
 - Use code highlighting 
-- Add littlefoot.js
-- Add css within the html so only one request is made for each page 
+DONE Add lightfoot.js
+- Use webpacks instead of CDNs
+- Add css within the html so only one request is made for each page  (webpack?)
 - Add a smnall 'Youtube channels I really like'
   - Techmoan
   - The real tony
   - Practical Engineering
   - Brady's stuff (Periodic videos, Numberphile, Computerphile)
-  - 
+
+
 
 New post ideas
 ===============
@@ -27,7 +32,6 @@ Getting my parent online without facebook
 Weird problems
 ==============
 You have to decide between photos.nishil.in and nishil.in/photos
-
 
 Old Stuff
 =========
