@@ -6,7 +6,7 @@ Improvements
 - Fix image layout
 - Add a git repo which can work with external issue trackers (gitlab/github etc)
 - Use code highlighting 
-- Add lightfoot.js
+- Add littlefoot.js
 - Add css within the html so only one request is made for each page 
 - Add a smnall 'Youtube channels I really like'
   - Techmoan
@@ -22,7 +22,7 @@ how to get random images/quotes etc on your website without javascript
 
 Getting my parent online without facebook
  - Using markdown and neocities?
- 
+
 
 Weird problems
 ==============
