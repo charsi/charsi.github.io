@@ -13,31 +13,29 @@
       <h1>Turn on/off appliances using a TV remote and Raspbery Pi</h1>
       <p>Get a relay  like <a href="https://www.ebay.ca/itm/363050803595">this one</a>. I got a two channel one because I wanted to control two separate devices - the TV and some active speakers. Get a single channel one if you just want to to turn on/off one device. Insert the relay into an <a href="http://www.amazon.in/Philips-Surge-Spike-Guard-Metres/dp/B00TIJXCLI">extension</a>. I had to block off one socket to make room. Carefully rewire the sockets so they go via the relays. Make sure you connect mains across the normally open points on the relay.</p>
 
-<p>With the mains power isolated within the extension board I made a small opening and routed jumper cables out of the extension. The cables were connected to the pins on the relay and the other ends I connected these to the Raspberry pi&rsquo;s +5v, GND and GPIO 4, 17.</p>
+<p>With the mains power isolated within the extension board I made a small opening and routed jumper cables out of the extension. The cables were connected to the pins on the relay and the other ends I connected these to the Raspberry pi's +5v, GND and GPIO 4, 17.</p>
 
 <p>I then wrote two small python scripts to toggle power for the speakers and the TV.</p>
 
 <p>I programmed my flirc USB to fire off f6 and f7 when red and green buttons on the tv remote are pressed and plugged it into the rpi.</p>
 
-<p>To have the rpi run the python scripts automatically when f6/f7 are pressed I had two options &ndash;</p>
+<p>To have the rpi run the python scripts automatically when f6/f7 are pressed I had two options --</p>
 
 <p>xbindkeys
 This was dead easy to configure. I pasted the following in ~/.xbindkeysrc and I was done -</p>
-
-<pre><code># toggle speakers
-&quot;python2 speakerstoggle.py&quot;
+<pre style="color:#f8f8f2;background-color:#272822"># toggle speakers
+&#34;python2 speakerstoggle.py&#34;
     Mod2 + F7
 
 # toggle tv
-&quot;python2 tvtoggle.py&quot;
+&#34;python2 tvtoggle.py&#34;
     Mod2 + F6
-</code></pre>
-
+</pre>
 <p>run <code>xbindkeys; xbindkeys</code> to reload xbindkeys.</p>
 
 <p>On the downside. This app needs x server running. This is wasted resource on a headless computer.</p>
 
-<p>I also couldn&rsquo;t figure out how to run <code>startx</code> on boot automatically.</p>
+<p>I also couldn't figure out how to run <code>startx</code> on boot automatically.</p>
 
 <p>triggerhappy
 This is a daemon written for exactly my use case. Underpowered systems running in headless mode. The challenge was actually installing and getting it running on runeaudio(Archlinux based).</p>
@@ -54,21 +52,16 @@ This is a daemon written for exactly my use case. Underpowered systems running i
 </ul>
 
 <p>I then uninstalled gcc and make since they were causing the pi to boot up very slowly.</p>
-
-<pre><code>pacman -Rns gcc make
-</code></pre>
-
+<pre style="color:#f8f8f2;background-color:#272822">pacman -Rns gcc make
+</pre>
 <p>I created a file /etc/triggerhappy/triggers.d/tv-speakers.conf (you can name this anything. All files from the folder are loaded by triggerhappy) and pasted the following -</p>
-
-<pre><code>KEY_F6 1 python2 /root/tvtoggle.py
+<pre style="color:#f8f8f2;background-color:#272822">KEY_F6 1 python2 /root/tvtoggle.py
 KEY_F7 1 python2 /root/speakerstoggle.py
-</code></pre>
-
+</pre>
 <p>you can test keycodes by running <code>thd -d /dev/input/*</code></p>
 
 <p>For some reason triggerhappy did not create a service for itself. I created one by creating a file called triggerhappy.service in /etc/systemd/system/ . I pasted the following in the file -</p>
-
-<pre><code>[Unit]
+<pre style="color:#f8f8f2;background-color:#272822">[Unit]
 Description=triggerhappy global hotkey daemon
 After=local-fs.target
 
@@ -79,8 +72,7 @@ ExecStart=/usr/sbin/thd --triggers /etc/triggerhappy/triggers.d/ --socket /run/$
 [Install]
 WantedBy=multi-user.target
 
-</code></pre>
-
+</pre>
 <p>and to enable the service</p>
 
 <p><code>systemctl enable triggerhappy.service</code></p>
