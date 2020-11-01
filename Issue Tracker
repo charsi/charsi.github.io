@@ -9,10 +9,12 @@ DONEAdd night mode to nishil.in css
 DONE Fix image layout
 - fix image layout on phone
 DONE Add a git repo which can work with external issue trackers (gitlab/github etc)
-- Use code highlighting 
+
+
 DONE Add lightfoot.js
 - Use webpacks instead of CDNs
 - Add css within the html so only one request is made for each page  (webpack?)
+- Use code highlighting 
 - Add a smnall 'Youtube channels I really like'
   - Techmoan
   - The real tony

@@ -27,8 +27,8 @@
 </ol>
 
 <p>The first requirement redirects people typing <code>www.mysite.com</code> to <code>mysite.com</code>. This is preferabe because google treats www and non-www as two separate domains.
-The second requirement forces all connections to use HTTPS. Because what Is the point of having HTTPS configured if you aren&rsquo;t going to enforce it?
-I am using geoip info in some of my apps and don&rsquo;t want to depend on external APIs or run a separate local instance to do the lookups. Much easier to just have the database sitting locally and webserver getting the info even before the request reaches the app.</p>
+The second requirement forces all connections to use HTTPS. Because what Is the point of having HTTPS configured if you aren't going to enforce it?
+I am using geoip info in some of my apps and don't want to depend on external APIs or run a separate local instance to do the lookups. Much easier to just have the database sitting locally and webserver getting the info even before the request reaches the app.</p>
 
 <h3>How-to</h3>
 
@@ -41,133 +41,131 @@ I am using geoip info in some of my apps and don&rsquo;t want to depend on exter
 <ul>
 <li>You need to have your SSL certificates in place before running nginx or it will crash. The SSL certificates need to be valid for both www and non-www domains otherwise redirects will throw up errors. <a href="https://letsencrypt.org/">Letsencrypt</a> is a good place to start when looking for certificates.</li>
 <li>Make sure your instalation of nginx has the geoip module by running <code>nginx -V</code> and looking for <code>--with-http_geoip_module</code></li>
-<li>Download and save Maxmind&rsquo;s city and country <a href="http://dev.maxmind.com/geoip/geoip2/geolite2/">Geo-ip databases</a>.</li>
+<li>Download and save Maxmind's city and country <a href="http://dev.maxmind.com/geoip/geoip2/geolite2/">Geo-ip databases</a>.</li>
 </ul>
 
 <h4>nginx.conf</h4>
 
-<p>After going through DO&rsquo;s tutorial and a few threads on Stack-overflow this is what I ended up with in my nginx.conf. Look for comments which explain things further  &ndash;</p>
+<p>After going through DO's tutorial and a few threads on Stack-overflow this is what I ended up with in my nginx.conf. Look for comments which explain things further  --</p>
+<pre style="color:#f8f8f2;background-color:#272822"><span style="color:#66d9ef">user</span>  <span style="color:#e6db74">nginx</span>;
+<span style="color:#66d9ef">worker_processes</span>  <span style="color:#ae81ff">1</span>;
 
-<pre><code class="language-nginx">user  nginx;
-worker_processes  1;
+<span style="color:#66d9ef">error_log</span>  <span style="color:#e6db74">/var/log/nginx/error.log</span> <span style="color:#e6db74">warn</span>;
+<span style="color:#66d9ef">pid</span>        <span style="color:#e6db74">/var/run/nginx.pid</span>;
 
-error_log  /var/log/nginx/error.log warn;
-pid        /var/run/nginx.pid;
+<span style="color:#75715e"># Required for Geo-ip to work
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">load_module</span> <span style="color:#e6db74">&#34;modules/ngx_http_geoip_module.so&#34;</span>;
 
-# Required for Geo-ip to work
-load_module &quot;modules/ngx_http_geoip_module.so&quot;;
-
-events {
-    worker_connections  1024;
+<span style="color:#66d9ef">events</span> {
+    <span style="color:#f92672">worker_connections</span>  <span style="color:#ae81ff">1024</span>;
 }
 
-http {
+<span style="color:#66d9ef">http</span> {
 
-    # maxmind's country and city IP database
-    geoip_country /etc/nginx/geoip/GeoIP.dat; 
-    geoip_city /etc/nginx/geoip/GeoLiteCity.dat;
+    <span style="color:#75715e"># maxmind&#39;s country and city IP database
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">geoip_country</span> <span style="color:#e6db74">/etc/nginx/geoip/GeoIP.dat</span>; 
+    <span style="color:#f92672">geoip_city</span> <span style="color:#e6db74">/etc/nginx/geoip/GeoLiteCity.dat</span>;
 
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
+    <span style="color:#f92672">include</span>       <span style="color:#e6db74">/etc/nginx/mime.types</span>;
+    <span style="color:#f92672">default_type</span>  <span style="color:#e6db74">application/octet-stream</span>;
 
-    log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
-                      '$status $body_bytes_sent &quot;$http_referer&quot; '
-                      '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+    <span style="color:#f92672">log_format</span>  <span style="color:#e6db74">main</span>  <span style="color:#e6db74">&#39;</span>$remote_addr <span style="color:#e6db74">-</span> $remote_user <span style="color:#e6db74">[</span>$time_local] <span style="color:#e6db74">&#34;</span>$request&#34; <span style="color:#e6db74">&#39;</span>
+                      <span style="color:#e6db74">&#39;</span>$status $body_bytes_sent <span style="color:#e6db74">&#34;</span>$http_referer&#34; <span style="color:#e6db74">&#39;</span>
+                      <span style="color:#e6db74">&#39;&#34;</span>$http_user_agent&#34; <span style="color:#e6db74">&#34;</span>$http_x_forwarded_for&#34;&#39;;
 
-    access_log  /dev/stdout  main;
-    sendfile        on;
-    keepalive_timeout  65;
+    <span style="color:#f92672">access_log</span>  <span style="color:#e6db74">/dev/stdout</span>  <span style="color:#e6db74">main</span>;
+    <span style="color:#f92672">sendfile</span>        <span style="color:#66d9ef">on</span>;
+    <span style="color:#f92672">keepalive_timeout</span>  <span style="color:#ae81ff">65</span>;
 	
-    # Listen for non-HTTPS requests and redirect them to HTTPS
-    server {
-        server_name www.site1.com site1.com;
-        return 301 https://site1.com$request_uri;
+    <span style="color:#75715e"># Listen for non-HTTPS requests and redirect them to HTTPS
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">server_name</span> <span style="color:#e6db74">www.site1.com</span> <span style="color:#e6db74">site1.com</span>;
+        <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://site1.com</span>$request_uri;
     }
 
-    # Listen for www requests with HTTPS and redirect them to non www site 
-    server {
-        listen              443 ssl;
-        server_name         www.site1.com;
-        # path to SSL certificates
-        ssl_certificate     /etc/letsencrypt/live/www.site1.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/www.site1.com/privkey.pem;
-        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers         HIGH:!aNULL:!MD5;
-        return 301 https://site1.com$request_uri;
-    }
-    
-    # Listen for non-www HTTPS requests and serve the app
-    server {
-        listen              443 ssl;
-        server_name         site1.com;
-        # path to SSL certificates
-        ssl_certificate     /etc/letsencrypt/live/www.site1.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/www.site1.com/privkey.pem;
-        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers         HIGH:!aNULL:!MD5;
-
-        location ^~ /.well-known/ {
-            root   /usr/share/nginx/html;
-            allow all;
-        }
-
-        location / {
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            # Set geo-ip headers
-            proxy_set_header geoip_country_code $geoip_country_code;
-            proxy_set_header geoip_city $geoip_city;
-            proxy_set_header geoip_latitude $geoip_latitude;
-            proxy_set_header geoip_longitude $geoip_longitude;
-            proxy_pass http://app1:3000;    # replace 'app1' with 'localhost' if ngix is not running within docker network 
-        }
+    <span style="color:#75715e"># Listen for www requests with HTTPS and redirect them to non www site 
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">listen</span>              <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+        <span style="color:#f92672">server_name</span>         <span style="color:#e6db74">www.site1.com</span>;
+        <span style="color:#75715e"># path to SSL certificates
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">ssl_certificate</span>     <span style="color:#e6db74">/etc/letsencrypt/live/www.site1.com/fullchain.pem</span>;
+        <span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/etc/letsencrypt/live/www.site1.com/privkey.pem</span>;
+        <span style="color:#f92672">ssl_protocols</span>       <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span>;
+        <span style="color:#f92672">ssl_ciphers</span>         <span style="color:#e6db74">HIGH:!aNULL:!MD5</span>;
+        <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://site1.com</span>$request_uri;
     }
     
-    # Listen for non-HTTPS requests and redirect them to HTTPS
-    server {
-        server_name www.site2.com site2.com;
-        return 301 https://site2.com$request_uri;
-    }
+    <span style="color:#75715e"># Listen for non-www HTTPS requests and serve the app
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">listen</span>              <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+        <span style="color:#f92672">server_name</span>         <span style="color:#e6db74">site1.com</span>;
+        <span style="color:#75715e"># path to SSL certificates
+</span><span style="color:#75715e"></span>        <span style="color:#f92672">ssl_certificate</span>     <span style="color:#e6db74">/etc/letsencrypt/live/www.site1.com/fullchain.pem</span>;
+        <span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/etc/letsencrypt/live/www.site1.com/privkey.pem</span>;
+        <span style="color:#f92672">ssl_protocols</span>       <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span>;
+        <span style="color:#f92672">ssl_ciphers</span>         <span style="color:#e6db74">HIGH:!aNULL:!MD5</span>;
 
-    # Listen for www requests with HTTPS and redirect them to non www site
-    server {
-        listen              443 ssl;
-        server_name         www.site2.com;
-        ssl_certificate     /etc/letsencrypt/live/www.site2.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/www.site2.com/privkey.pem;
-        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers         HIGH:!aNULL:!MD5;
-        return 301 https://site2.com$request_uri;
-    }
-
-    # Listen for non-www HTTPS requests and serve the app
-    server {
-        listen              443 ssl;
-        server_name         site2.com;
-        ssl_certificate     /etc/letsencrypt/live/www.site2.com/fullchain.pem;
-        ssl_certificate_key /etc/letsencrypt/live/www.site2.com/privkey.pem;
-        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers         HIGH:!aNULL:!MD5;
-
-        location ^~ /.well-known/ {
-            root   /usr/share/nginx/html;
-            allow all;
+        <span style="color:#f92672">location</span> <span style="color:#e6db74">^~</span> <span style="color:#e6db74">/.well-known/</span> {
+            <span style="color:#f92672">root</span>   <span style="color:#e6db74">/usr/share/nginx/html</span>;
+            <span style="color:#f92672">allow</span> <span style="color:#e6db74">all</span>;
         }
 
-        location / {
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            # Set geo-ip headers
-            proxy_set_header geoip_country_code $geoip_country_code;
-            proxy_set_header geoip_city $geoip_city;
-            proxy_set_header geoip_latitude $geoip_latitude;
-            proxy_set_header geoip_longitude $geoip_longitude;
-            proxy_pass http://app2:4200;  # replace 'app2' with 'localhost' if ngix is not running within docker network   
+        <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $host;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Real-IP</span> $remote_addr;
+            <span style="color:#75715e"># Set geo-ip headers
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_country_code</span> $geoip_country_code;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_city</span> $geoip_city;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_latitude</span> $geoip_latitude;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_longitude</span> $geoip_longitude;
+            <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://app1:3000</span>;    <span style="color:#75715e"># replace &#39;app1&#39; with &#39;localhost&#39; if ngix is not running within docker network 
+</span><span style="color:#75715e"></span>        }
+    }
+    
+    <span style="color:#75715e"># Listen for non-HTTPS requests and redirect them to HTTPS
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">server_name</span> <span style="color:#e6db74">www.site2.com</span> <span style="color:#e6db74">site2.com</span>;
+        <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://site2.com</span>$request_uri;
+    }
+
+    <span style="color:#75715e"># Listen for www requests with HTTPS and redirect them to non www site
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">listen</span>              <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+        <span style="color:#f92672">server_name</span>         <span style="color:#e6db74">www.site2.com</span>;
+        <span style="color:#f92672">ssl_certificate</span>     <span style="color:#e6db74">/etc/letsencrypt/live/www.site2.com/fullchain.pem</span>;
+        <span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/etc/letsencrypt/live/www.site2.com/privkey.pem</span>;
+        <span style="color:#f92672">ssl_protocols</span>       <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span>;
+        <span style="color:#f92672">ssl_ciphers</span>         <span style="color:#e6db74">HIGH:!aNULL:!MD5</span>;
+        <span style="color:#f92672">return</span> <span style="color:#ae81ff">301</span> <span style="color:#e6db74">https://site2.com</span>$request_uri;
+    }
+
+    <span style="color:#75715e"># Listen for non-www HTTPS requests and serve the app
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">server</span> {
+        <span style="color:#f92672">listen</span>              <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+        <span style="color:#f92672">server_name</span>         <span style="color:#e6db74">site2.com</span>;
+        <span style="color:#f92672">ssl_certificate</span>     <span style="color:#e6db74">/etc/letsencrypt/live/www.site2.com/fullchain.pem</span>;
+        <span style="color:#f92672">ssl_certificate_key</span> <span style="color:#e6db74">/etc/letsencrypt/live/www.site2.com/privkey.pem</span>;
+        <span style="color:#f92672">ssl_protocols</span>       <span style="color:#e6db74">TLSv1</span> <span style="color:#e6db74">TLSv1.1</span> <span style="color:#e6db74">TLSv1.2</span>;
+        <span style="color:#f92672">ssl_ciphers</span>         <span style="color:#e6db74">HIGH:!aNULL:!MD5</span>;
+
+        <span style="color:#f92672">location</span> <span style="color:#e6db74">^~</span> <span style="color:#e6db74">/.well-known/</span> {
+            <span style="color:#f92672">root</span>   <span style="color:#e6db74">/usr/share/nginx/html</span>;
+            <span style="color:#f92672">allow</span> <span style="color:#e6db74">all</span>;
         }
+
+        <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">Host</span> $host;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">X-Real-IP</span> $remote_addr;
+            <span style="color:#75715e"># Set geo-ip headers
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_country_code</span> $geoip_country_code;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_city</span> $geoip_city;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_latitude</span> $geoip_latitude;
+            <span style="color:#f92672">proxy_set_header</span> <span style="color:#e6db74">geoip_longitude</span> $geoip_longitude;
+            <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://app2:4200</span>;  <span style="color:#75715e"># replace &#39;app2&#39; with &#39;localhost&#39; if ngix is not running within docker network   
+</span><span style="color:#75715e"></span>        }
     }
 }
-</code></pre>
-
+</pre>
       <p>
         <a href="/">Home</a>
       </p>
