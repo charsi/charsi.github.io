@@ -17,19 +17,19 @@
 
 <h3>Rant</h3>
 
-<p>Internet situation in India is bad. I am currently living in New Delhi but was based in UK for the last 5 years. I had got used to 50mbps and even 100mbps unlimited connections. After moving back I was a bit surprised to learn things hadn't moved on much at all since I left. Only a couple of ISPs (Airtel and MTNL) in Delhi were capable of providing stable connections. Fast, unlimited plans were nowhere to be found. I was frequently paying more than Rs4,000 per month for internet, due to all the additional data I was using. This was on Airtel's 8mbps plan which came with a 80GB 'FUP'<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>. I was paying far less for completely unlimited 50mbps/100mbps plans back in UK!</p>
+<p>Internet situation in India is bad. I am currently living in New Delhi but was based in UK for the last 5 years. I had got used to 50mbps and even 100mbps unlimited connections. After moving back I was a bit surprised to learn things hadn't moved on much at all since I left. Only a couple of ISPs (Airtel and MTNL) in Delhi were capable of providing stable connections. Fast, unlimited plans were nowhere to be found. I was frequently paying more than Rs4,000 per month for internet, due to all the additional data I was using. This was on Airtel's 8mbps plan which came with a 80GB 'FUP'[^1]. I was paying far less for completely unlimited 50mbps/100mbps plans back in UK!</p>
 
-<p>So I bit the bullet and got a connection from a local ISP called 'Excitel'. I had never heard of them and was dubious about their ability to provide a reliable connection. But their 50mbps <strong>unlimited</strong> connection at Rs 800 per month was enticing enough. Four guys turned up to do the installation. The internet came over a LAN cable flung from the nearest khamba<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">2</a></sup>. I had last got internet this way more than 10 years ago<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">3</a></sup>. As expected the connection was very unreliable. I was raising several support tickets each week to get the connectivity restored each time it went down.
+<p>So I bit the bullet and got a connection from a local ISP called 'Excitel'. I had never heard of them and was dubious about their ability to provide a reliable connection. But their 50mbps <strong>unlimited</strong> connection at Rs 800 per month was enticing enough. Four guys turned up to do the installation. The internet came over a LAN cable flung from the nearest khamba[^5]. I had last got internet this way more than 10 years ago[^2]. As expected the connection was very unreliable. I was raising several support tickets each week to get the connectivity restored each time it went down.
 I had wisely not disconnected Airtel yet. So whenever Excitel went down I could switch wifi connections and start using Airtel for a few hours. So I now had unlimited internet for about Rs1800 per month for the two connections(after switching to Airtel's lowest 10GB plan). But the manual switching of wifi connections was getting annoying.</p>
 
-<p>After a few months of putting up with this I finally put a solution in place. I have been running  <a href="https://advancedtomato.com/">Tomato firmware</a><sup class="footnote-ref" id="fnref:3"><a href="#fn:3">4</a></sup> on my router since many years. And recently the developers added multi-WAN functionality to the firmware. Perfect. I updated the router and made the required configuration changes and lived happily ever after.</p>
+<p>After a few months of putting up with this I finally put a solution in place. I have been running  <a href="https://advancedtomato.com/">Tomato firmware</a>[^3] on my router since many years. And recently the developers added multi-WAN functionality to the firmware. Perfect. I updated the router and made the required configuration changes and lived happily ever after.</p>
 
 <h3>How-To</h3>
 
 <p>Here are the steps to follow if you find yourself in a similar situation -</p>
 
 <ol>
-<li>Get a router that supports <a href="https://advancedtomato.com/">Tomato firmware</a> (anything that has a broadcom chip inside). Get one of <a href="https://advancedtomato.com/downloads">these</a> if you are unsure. I am using a Netgear WNR3500L v2<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">5</a></sup>.</li>
+<li>Get a router that supports <a href="https://advancedtomato.com/">Tomato firmware</a> (anything that has a broadcom chip inside). Get one of <a href="https://advancedtomato.com/downloads">these</a> if you are unsure. I am using a Netgear WNR3500L v2[^4].</li>
 </ol>
 
 <ul>
@@ -60,23 +60,11 @@ I had wisely not disconnected Airtel yet. So whenever Excitel went down I could 
 <li>Airtel has upped its smallest plan's data from 10 to 25 GB now so I am less concerned about going over in the periods Excitel is down. However it would still be a good idea to keep track of usage on the backup connection.</li>
 </ul>
 
-<div class="footnotes">
-
-<hr>
-
-<ol>
-<li id="fn:1">ISPs in India really need to stop abusing the term 'Fair Usage Policy'</li>
-
-<li id="fn:5">Utility pole</li>
-
-<li id="fn:2">Anyone remember Sify Broadband?</li>
-
-<li id="fn:3">Tomato is an opensource firmware that can supercharge your router.</li>
-
-<li id="fn:4">Fun fact, I purchased four of these for &amp;pound;1 each a few years ago :)</li>
-</ol>
-
-</div>
+<p>[^1]: ISPs in India really need to stop abusing the term 'Fair Usage Policy'
+[^2]: Anyone remember Sify Broadband?
+[^3]: Tomato is an opensource firmware that can supercharge your router.
+[^4]: Fun fact, I purchased four of these for &amp;pound;1 each a few years ago :)
+[^5]: Utility pole</p>
 
       <p>
         <a href="/">Home</a>

@@ -67,3 +67,7 @@ This is my function that forwards SMS-
 * Add SMS capabilities to my number
 * Build a product out of the whole thing. Profit. Retire. 
 * Explore possibilities with Twilio alternatives such as [Pvilo](https://www.plivo.com/) and [Sinch](https://www.sinch.com/). 
+
+
+##### Note
+If you are looking for something something similar to what is described above you should check out [jmp.chat](https://jmp.chat). It offers SMS enable voip services using simple open protocols (XMPP and SIP). I discovered it two years after writing this post.  
