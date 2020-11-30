@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 29 Nov 2020 19:09:42 -0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Nov 2020 19:10:55 -0800</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -125,7 +125,7 @@ This is my function that forwards SMS-</p>
 
 <h5>Note</h5>
 
-<p>If you are looking for something something similar to what is described above you should check out <a href="https://jmp.chat">jmp.chat</a>. It offers SMS enable voip services using simple open protocols (XMPP and SIP). I discovered it two years after writing this post.</p>
+<p>If you are looking for something something similar to what is described above you should check out <a href="https://jmp.chat">jmp.chat</a>. It offers SMS enabled voip services using open protocols (XMPP and SIP). I discovered it two years after writing this post.</p>
 ]]></description>
         <link>https://nishil.in/posts/trying-to-create-a-personal-voip-service-with-twilio.html</link>
         <guid>https://nishil.in/posts/trying-to-create-a-personal-voip-service-with-twilio.html</guid>

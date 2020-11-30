@@ -70,4 +70,4 @@ This is my function that forwards SMS-
 
 
 ##### Note
-If you are looking for something something similar to what is described above you should check out [jmp.chat](https://jmp.chat). It offers SMS enable voip services using simple open protocols (XMPP and SIP). I discovered it two years after writing this post.  
+If you are looking for something something similar to what is described above you should check out [jmp.chat](https://jmp.chat). It offers SMS enabled voip services using open protocols (XMPP and SIP). I discovered it two years after writing this post.  
