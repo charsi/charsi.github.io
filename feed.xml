@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sun, 29 Nov 2020 19:10:55 -0800</lastBuildDate>
+    <lastBuildDate>Sat, 05 Dec 2020 12:59:41 -0800</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -138,7 +138,7 @@ This is my function that forwards SMS-</p>
 
 <h3>Learning Urdu</h3>
 
-<p>A few years ago I tried to learn to read Urdu. Since it is basically the same language as Hindi with a different script, I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton[^1] albeit very slowly.</p>
+<p>A few years ago I tried to learn to read Urdu. Since it is basically the same language as Hindi with a different script, I figured it won't be too hard. I was living with a few Pakistani friends at the time but they didn't prove to be much help. So, I used the internet instead and after a few weeks I could just about recognize a few letters. I could even read read some shop signs written in Urdu around Luton<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> albeit very slowly.</p>
 
 <p>I left it at that until last year when I moved back to Delhi. I took some classes at <a href="http://www.zabaan.com">Zabaan</a>. This helped a lot and I could finally start reading a bit more fluently. There is a lot of multilingual signage around Delhi. Road markings are usually written in four languages - Hindi, English, Punjabi and Urdu! So I sometimes challenge myself to read in Urdu without looking at the other texts.</p>
 
@@ -162,12 +162,21 @@ This is my function that forwards SMS-</p>
 
 <p>If you are one of half a billion people who understand Hindi or Urdu. I urge you to go and learn the other script for your language.</p>
 
-<p>Our language Urdu-Hindi is beautiful. I know this because for a few years I didn't have many people I could speak in Hindi with on a regular basis. Things are easier to express in Hindi-Urdu and no matter how much of a 'angrez-ki-aulad'[^2] you are, for some things Hindi will remain the perfect language.</p>
+<p>Our language Urdu-Hindi is beautiful. I know this because for a few years I didn't have many people I could speak in Hindi with on a regular basis. Things are easier to express in Hindi-Urdu and no matter how much of a 'angrez-ki-aulad'<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> you are, for some things Hindi will remain the perfect language.</p>
 
 <p>~WIP~</p>
 
-<p>[^1]: Do whatever is humanly possible to avoid going to this place. It is awful.
-[^2]: Prime example of what this sentence is referring to.</p>
+<div class="footnotes">
+
+<hr>
+
+<ol>
+<li id="fn:1">Do whatever is humanly possible to avoid going to this place. It is awful.</li>
+
+<li id="fn:2">Prime example of what this sentence is referring to.</li>
+</ol>
+
+</div>
 ]]></description>
         <link>https://nishil.in/posts/my-experiments-with-urdu.html</link>
         <guid>https://nishil.in/posts/my-experiments-with-urdu.html</guid>
@@ -295,7 +304,7 @@ You will need to come tomorrow.</em></p>
 
 <p><strong>TLDR</strong> - I actually catch a flight to Bhutan. Can't get a bus ticket to Bumthang. But then I get it in the end.</p>
 
-<p>I got an Uber at 7.30. Caught the flight like a normal person and was in Bhutan at 1PM Bhutan time[^1].</p>
+<p>I got an Uber at 7.30. Caught the flight like a normal person and was in Bhutan at 1PM Bhutan time<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
 
 <p><img src="/images/bhutan-trip-log-ii/DSC06955.JPG" alt="That is Everest in the centre" /></p>
 
@@ -303,7 +312,7 @@ You will need to come tomorrow.</em></p>
 
 <p><img src="/images/bhutan-trip-log-ii/DSC06533.JPG" alt="Paro Airport" /></p>
 
-<p>Got a taxi to Thimpu, Bhutan's capital city. Paid Nu.1,000 [^2] for the 1.5 hr drive. Shared taxis go for Nu.250 but you need people to share with. Everybody on my flight seemed to have arrangements with their travel agents.</p>
+<p>Got a taxi to Thimpu, Bhutan's capital city. Paid Nu.1,000 <sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> for the 1.5 hr drive. Shared taxis go for Nu.250 but you need people to share with. Everybody on my flight seemed to have arrangements with their travel agents.</p>
 
 <p><img src="/images/bhutan-trip-log-ii/Screenshot-from-2017-04-21-09-34-42.png" alt="On the way to Thimpu from Paro" /></p>
 
@@ -501,9 +510,17 @@ It turned up the next day :)</p>
 Around 12k for hotels, food, fuel
 Around 20k bike courier, flights</p>
 
-<p>[^1]: Half an hour ahead of IST</p>
+<div class="footnotes">
 
-<p>[^2]: Bhutan's currency 'Ngultrum' (pronounced 'zong') has its value linked to the Indian Rupee. So â‚¹1 = Nu.1</p>
+<hr>
+
+<ol>
+<li id="fn:1">Half an hour ahead of IST</li>
+
+<li id="fn:2">Bhutan's currency 'Ngultrum' (pronounced 'zong') has its value linked to the Indian Rupee. So â‚¹1 = Nu.1</li>
+</ol>
+
+</div>
 ]]></description>
         <link>https://nishil.in/posts/bhutan-trip-log-ii.html</link>
         <guid>https://nishil.in/posts/bhutan-trip-log-ii.html</guid>
@@ -754,9 +771,6 @@ Software - OMV + Snapraid + MergerFS</p>
 Software - FreeNAS + ZFS</p>
 
 <p>resources : reddit/datahoarder, reddit/homeserver</p>
-
-<p>[^1]: Very much like normal windows but with some added server jazz
-[^2]: Two if you replace the CD drive with a HDD too and a few more over USB</p>
 ]]></description>
         <link>https://nishil.in/posts/joys-of-network-attached-storage.html</link>
         <guid>https://nishil.in/posts/joys-of-network-attached-storage.html</guid>
@@ -933,19 +947,19 @@ I am using geoip info in some of my apps and don't want to depend on external AP
 
 <h3>Rant</h3>
 
-<p>Internet situation in India is bad. I am currently living in New Delhi but was based in UK for the last 5 years. I had got used to 50mbps and even 100mbps unlimited connections. After moving back I was a bit surprised to learn things hadn't moved on much at all since I left. Only a couple of ISPs (Airtel and MTNL) in Delhi were capable of providing stable connections. Fast, unlimited plans were nowhere to be found. I was frequently paying more than Rs4,000 per month for internet, due to all the additional data I was using. This was on Airtel's 8mbps plan which came with a 80GB 'FUP'[^1]. I was paying far less for completely unlimited 50mbps/100mbps plans back in UK!</p>
+<p>Internet situation in India is bad. I am currently living in New Delhi but was based in UK for the last 5 years. I had got used to 50mbps and even 100mbps unlimited connections. After moving back I was a bit surprised to learn things hadn't moved on much at all since I left. Only a couple of ISPs (Airtel and MTNL) in Delhi were capable of providing stable connections. Fast, unlimited plans were nowhere to be found. I was frequently paying more than Rs4,000 per month for internet, due to all the additional data I was using. This was on Airtel's 8mbps plan which came with a 80GB 'FUP'<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>. I was paying far less for completely unlimited 50mbps/100mbps plans back in UK!</p>
 
-<p>So I bit the bullet and got a connection from a local ISP called 'Excitel'. I had never heard of them and was dubious about their ability to provide a reliable connection. But their 50mbps <strong>unlimited</strong> connection at Rs 800 per month was enticing enough. Four guys turned up to do the installation. The internet came over a LAN cable flung from the nearest khamba[^5]. I had last got internet this way more than 10 years ago[^2]. As expected the connection was very unreliable. I was raising several support tickets each week to get the connectivity restored each time it went down.
+<p>So I bit the bullet and got a connection from a local ISP called 'Excitel'. I had never heard of them and was dubious about their ability to provide a reliable connection. But their 50mbps <strong>unlimited</strong> connection at Rs 800 per month was enticing enough. Four guys turned up to do the installation. The internet came over a LAN cable flung from the nearest khamba<sup class="footnote-ref" id="fnref:5"><a href="#fn:5">2</a></sup>. I had last got internet this way more than 10 years ago<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">3</a></sup>. As expected the connection was very unreliable. I was raising several support tickets each week to get the connectivity restored each time it went down.
 I had wisely not disconnected Airtel yet. So whenever Excitel went down I could switch wifi connections and start using Airtel for a few hours. So I now had unlimited internet for about Rs1800 per month for the two connections(after switching to Airtel's lowest 10GB plan). But the manual switching of wifi connections was getting annoying.</p>
 
-<p>After a few months of putting up with this I finally put a solution in place. I have been running  <a href="https://advancedtomato.com/">Tomato firmware</a>[^3] on my router since many years. And recently the developers added multi-WAN functionality to the firmware. Perfect. I updated the router and made the required configuration changes and lived happily ever after.</p>
+<p>After a few months of putting up with this I finally put a solution in place. I have been running  <a href="https://advancedtomato.com/">Tomato firmware</a><sup class="footnote-ref" id="fnref:3"><a href="#fn:3">4</a></sup> on my router since many years. And recently the developers added multi-WAN functionality to the firmware. Perfect. I updated the router and made the required configuration changes and lived happily ever after.</p>
 
 <h3>How-To</h3>
 
 <p>Here are the steps to follow if you find yourself in a similar situation -</p>
 
 <ol>
-<li>Get a router that supports <a href="https://advancedtomato.com/">Tomato firmware</a> (anything that has a broadcom chip inside). Get one of <a href="https://advancedtomato.com/downloads">these</a> if you are unsure. I am using a Netgear WNR3500L v2[^4].</li>
+<li>Get a router that supports <a href="https://advancedtomato.com/">Tomato firmware</a> (anything that has a broadcom chip inside). Get one of <a href="https://advancedtomato.com/downloads">these</a> if you are unsure. I am using a Netgear WNR3500L v2<sup class="footnote-ref" id="fnref:4"><a href="#fn:4">5</a></sup>.</li>
 </ol>
 
 <ul>
@@ -976,11 +990,23 @@ I had wisely not disconnected Airtel yet. So whenever Excitel went down I could 
 <li>Airtel has upped its smallest plan's data from 10 to 25 GB now so I am less concerned about going over in the periods Excitel is down. However it would still be a good idea to keep track of usage on the backup connection.</li>
 </ul>
 
-<p>[^1]: ISPs in India really need to stop abusing the term 'Fair Usage Policy'
-[^2]: Anyone remember Sify Broadband?
-[^3]: Tomato is an opensource firmware that can supercharge your router.
-[^4]: Fun fact, I purchased four of these for &amp;pound;1 each a few years ago :)
-[^5]: Utility pole</p>
+<div class="footnotes">
+
+<hr>
+
+<ol>
+<li id="fn:1">ISPs in India really need to stop abusing the term 'Fair Usage Policy'</li>
+
+<li id="fn:5">Utility pole</li>
+
+<li id="fn:2">Anyone remember Sify Broadband?</li>
+
+<li id="fn:3">Tomato is an opensource firmware that can supercharge your router.</li>
+
+<li id="fn:4">Fun fact, I purchased four of these for &pound;1 each a few years ago :)</li>
+</ol>
+
+</div>
 ]]></description>
         <link>https://nishil.in/posts/redundant-internet-using-a-tomato-capable-router.html</link>
         <guid>https://nishil.in/posts/redundant-internet-using-a-tomato-capable-router.html</guid>
