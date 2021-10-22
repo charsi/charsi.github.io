@@ -4,7 +4,8 @@
     <title>Turn on/off appliances using a TV remote and Raspbery Pi</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/charsi/steel.css/steel.min.css" />
+    
+    <link rel="stylesheet" href="https://elementcss.neocities.org/dist/element-0.1.1.min.css">
     <link rel="stylesheet" href="https://unpkg.com/littlefoot/dist/littlefoot.css" />
 
   </head>
@@ -23,7 +24,7 @@
 
 <p>xbindkeys
 This was dead easy to configure. I pasted the following in ~/.xbindkeysrc and I was done -</p>
-<pre style="color:#f8f8f2;background-color:#272822"># toggle speakers
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822"># toggle speakers
 &#34;python2 speakerstoggle.py&#34;
     Mod2 + F7
 
@@ -52,16 +53,16 @@ This is a daemon written for exactly my use case. Underpowered systems running i
 </ul>
 
 <p>I then uninstalled gcc and make since they were causing the pi to boot up very slowly.</p>
-<pre style="color:#f8f8f2;background-color:#272822">pacman -Rns gcc make
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822">pacman -Rns gcc make
 </pre>
 <p>I created a file /etc/triggerhappy/triggers.d/tv-speakers.conf (you can name this anything. All files from the folder are loaded by triggerhappy) and pasted the following -</p>
-<pre style="color:#f8f8f2;background-color:#272822">KEY_F6 1 python2 /root/tvtoggle.py
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822">KEY_F6 1 python2 /root/tvtoggle.py
 KEY_F7 1 python2 /root/speakerstoggle.py
 </pre>
 <p>you can test keycodes by running <code>thd -d /dev/input/*</code></p>
 
 <p>For some reason triggerhappy did not create a service for itself. I created one by creating a file called triggerhappy.service in /etc/systemd/system/ . I pasted the following in the file -</p>
-<pre style="color:#f8f8f2;background-color:#272822">[Unit]
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822">[Unit]
 Description=triggerhappy global hotkey daemon
 After=local-fs.target
 

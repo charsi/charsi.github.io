@@ -5,7 +5,7 @@
     <description></description>
     <link>https://nishil.in</link>
     <atom:link href="https://nishil.in/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 05 Dec 2020 12:59:41 -0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Oct 2021 21:44:20 -0700</lastBuildDate>
     
       <item>
         <title><![CDATA[Whats on my phone]]></title>
@@ -197,7 +197,7 @@ This is my function that forwards SMS-</p>
 
 <p>xbindkeys
 This was dead easy to configure. I pasted the following in ~/.xbindkeysrc and I was done -</p>
-<pre style="color:#f8f8f2;background-color:#272822"># toggle speakers
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822"># toggle speakers
 &#34;python2 speakerstoggle.py&#34;
     Mod2 + F7
 
@@ -226,16 +226,16 @@ This is a daemon written for exactly my use case. Underpowered systems running i
 </ul>
 
 <p>I then uninstalled gcc and make since they were causing the pi to boot up very slowly.</p>
-<pre style="color:#f8f8f2;background-color:#272822">pacman -Rns gcc make
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822">pacman -Rns gcc make
 </pre>
 <p>I created a file /etc/triggerhappy/triggers.d/tv-speakers.conf (you can name this anything. All files from the folder are loaded by triggerhappy) and pasted the following -</p>
-<pre style="color:#f8f8f2;background-color:#272822">KEY_F6 1 python2 /root/tvtoggle.py
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822">KEY_F6 1 python2 /root/tvtoggle.py
 KEY_F7 1 python2 /root/speakerstoggle.py
 </pre>
 <p>you can test keycodes by running <code>thd -d /dev/input/*</code></p>
 
 <p>For some reason triggerhappy did not create a service for itself. I created one by creating a file called triggerhappy.service in /etc/systemd/system/ . I pasted the following in the file -</p>
-<pre style="color:#f8f8f2;background-color:#272822">[Unit]
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822">[Unit]
 Description=triggerhappy global hotkey daemon
 After=local-fs.target
 
@@ -815,7 +815,7 @@ I am using geoip info in some of my apps and don't want to depend on external AP
 <h4>nginx.conf</h4>
 
 <p>After going through DO's tutorial and a few threads on Stack-overflow this is what I ended up with in my nginx.conf. Look for comments which explain things further  --</p>
-<pre style="color:#f8f8f2;background-color:#272822"><span style="color:#66d9ef">user</span>  <span style="color:#e6db74">nginx</span>;
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822"><span style="color:#66d9ef">user</span>  <span style="color:#e6db74">nginx</span>;
 <span style="color:#66d9ef">worker_processes</span>  <span style="color:#ae81ff">1</span>;
 
 <span style="color:#66d9ef">error_log</span>  <span style="color:#e6db74">/var/log/nginx/error.log</span> <span style="color:#e6db74">warn</span>;

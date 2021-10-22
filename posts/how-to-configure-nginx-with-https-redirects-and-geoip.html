@@ -4,7 +4,8 @@
     <title>How to configure nginx with HTTPS redirects and geoip</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/charsi/steel.css/steel.min.css" />
+    
+    <link rel="stylesheet" href="https://elementcss.neocities.org/dist/element-0.1.1.min.css">
     <link rel="stylesheet" href="https://unpkg.com/littlefoot/dist/littlefoot.css" />
 
   </head>
@@ -47,7 +48,7 @@ I am using geoip info in some of my apps and don't want to depend on external AP
 <h4>nginx.conf</h4>
 
 <p>After going through DO's tutorial and a few threads on Stack-overflow this is what I ended up with in my nginx.conf. Look for comments which explain things further  --</p>
-<pre style="color:#f8f8f2;background-color:#272822"><span style="color:#66d9ef">user</span>  <span style="color:#e6db74">nginx</span>;
+<pre tabindex="0" style="color:#f8f8f2;background-color:#272822"><span style="color:#66d9ef">user</span>  <span style="color:#e6db74">nginx</span>;
 <span style="color:#66d9ef">worker_processes</span>  <span style="color:#ae81ff">1</span>;
 
 <span style="color:#66d9ef">error_log</span>  <span style="color:#e6db74">/var/log/nginx/error.log</span> <span style="color:#e6db74">warn</span>;
