@@ -11,5 +11,5 @@ You can reach me at [absolutely_anything_here@nishil.in](mailto:absolutely_anyth
 I'm also on [GitHub](https://github.com/charsi) and [Mastodon](https://mastodon.social/@charsi).
 
 This website runs on [GitHub Pages](https://pages.github.com).
-Pages are generated from Markdown using [`pt`](https://github.com/hoffa/pt).
+Pages are generated from [markdown](https://en.wikipedia.org/wiki/Markdown) using [`pt`](https://github.com/hoffa/pt).
 
