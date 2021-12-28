@@ -7,8 +7,6 @@ I'm a software engineer living in Vancouver, Canada.
 I work for [Change Healthcare](https://www.changehealthcare.com/solutions/enterprise-imaging)'s imaging business. 
 I have a backgound in large scale 3D simulations and VR. Previously based in London, UK. I grew up in New Delhi, India.
 
-Some examples of my work are available [here](/projects).
-
 You can reach me at <hello@nishil.in>.
 I'm also on [GitHub](https://github.com/charsi) and [Mastodon](https://mastodon.social/@charsi).
 
