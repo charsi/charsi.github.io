@@ -3,7 +3,7 @@ title: About
 exclude: yes
 ---
 
-I'm a software developer living in Vancouver, Canada. I currently work for a [healthcare company](https://www.changehealthcare.com/solutions/enterprise-imaging). I split my time writing application code developing cloud infrastructure automation. I work mostly with .NET, Typescript/Node and IaaC technologies like Cloudformation and Terraform. 
+I am a software developer living in Vancouver, Canada. I currently work for a [Change Healthcare](https://www.changehealthcare.com/solutions/enterprise-imaging)'s imaging business. I split my time writing application code and developing cloud infrastructure automation. I work mostly with C#/.NET, Typescript/Node and IaaC technologies like Cloudformation and Terraform. 
 
 I have a backgound in large scale 3D simulations and VR. Previously based in London, UK. I grew up in New Delhi, India.
 
