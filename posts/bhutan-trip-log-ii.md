@@ -246,20 +246,20 @@ It turned up the next day :)
 
 
 ### Itinerary
-20/10/2016
-20 - ~~Fly to Paro~~
-21 - Fly to Paro, get tickets, permits, etc
-22 - Thimpu
-23 - Thimpu to Bumthang (Jakar village) 
-24 - Jakar to Mongar
-25 - Mongar to Tashiyangtse
-26 - Tashiyangtse to Tashigang
-27 - Tashigang to Wamrong
-28 - Wamrong to Guwahati via Samdrup Jhonkar, Flight to Delhi 
+20/10/2016  
+20 - ~~Fly to Paro~~  
+21 - Fly to Paro, get tickets, permits, etc  
+22 - Thimpu  
+23 - Thimpu to Bumthang (Jakar village)   
+24 - Jakar to Mongar  
+25 - Mongar to Tashiyangtse  
+26 - Tashiyangtse to Tashigang  
+27 - Tashigang to Wamrong  
+28 - Wamrong to Guwahati via Samdrup Jhonkar, Flight to Delhi  
 
-Expenses 
-Around 12k for hotels, food, fuel
-Around 20k bike courier, flights
+Expenses  
+Around 12k for hotels, food, fuel  
+Around 20k bike courier, flights  
 
 
 [^1]: Half an hour ahead of IST
